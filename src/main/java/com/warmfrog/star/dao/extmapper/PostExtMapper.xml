@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warmfrog.star.dao.extmapper.PostExtMapper">
+  <resultMap id="BaseResultMap" type="com.warmfrog.star.dao.mapper.entity.Post">
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="key_words" jdbcType="OTHER" property="keyWords" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
+    <result column="author" jdbcType="OTHER" property="author" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
+    <result column="authors" jdbcType="OTHER" property="authors" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="download_url" jdbcType="VARCHAR" property="downloadUrl" />
+    <result column="content_markdown" jdbcType="VARCHAR" property="contentMarkdown" />
+    <result column="content_html" jdbcType="VARCHAR" property="contentHtml" />
+    <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="cover_image" jdbcType="VARCHAR" property="coverImage" />
+    <result column="images" jdbcType="OTHER" property="images" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
+    <result column="word_count" jdbcType="INTEGER" property="wordCount" />
+    <result column="reader_count" jdbcType="INTEGER" property="readerCount" />
+    <result column="likes" jdbcType="INTEGER" property="likes" />
+    <result column="dislikes" jdbcType="INTEGER" property="dislikes" />
+    <result column="collection_count" jdbcType="INTEGER" property="collectionCount" />
+    <result column="download_count" jdbcType="INTEGER" property="downloadCount" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+    <result column="released_platforms" jdbcType="OTHER" property="releasedPlatforms" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
+    <result column="referenced_count" jdbcType="INTEGER" property="referencedCount" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="tags" jdbcType="OTHER" property="tags" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
+    <result column="classifications" jdbcType="OTHER" property="classifications" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="references" jdbcType="OTHER" property="references" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
+  </resultMap>
+
+</mapper>
