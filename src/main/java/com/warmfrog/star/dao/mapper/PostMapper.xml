@@ -1,0 +1,822 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warmfrog.star.dao.mapper.PostMapper">
+  <resultMap id="BaseResultMap" type="com.warmfrog.star.dao.mapper.entity.Post">
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="key_words" jdbcType="OTHER" property="keyWords" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
+    <result column="author" jdbcType="OTHER" property="author" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
+    <result column="authors" jdbcType="OTHER" property="authors" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="download_url" jdbcType="VARCHAR" property="downloadUrl" />
+    <result column="content_markdown" jdbcType="VARCHAR" property="contentMarkdown" />
+    <result column="content_html" jdbcType="VARCHAR" property="contentHtml" />
+    <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="cover_image" jdbcType="VARCHAR" property="coverImage" />
+    <result column="images" jdbcType="OTHER" property="images" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
+    <result column="word_count" jdbcType="INTEGER" property="wordCount" />
+    <result column="reader_count" jdbcType="INTEGER" property="readerCount" />
+    <result column="likes" jdbcType="INTEGER" property="likes" />
+    <result column="dislikes" jdbcType="INTEGER" property="dislikes" />
+    <result column="collection_count" jdbcType="INTEGER" property="collectionCount" />
+    <result column="download_count" jdbcType="INTEGER" property="downloadCount" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+    <result column="released_platforms" jdbcType="OTHER" property="releasedPlatforms" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
+    <result column="referenced_count" jdbcType="INTEGER" property="referencedCount" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="tags" jdbcType="OTHER" property="tags" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
+    <result column="classifications" jdbcType="OTHER" property="classifications" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="references" jdbcType="OTHER" property="references" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.keyWordsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.authorCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.authorsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.imagesCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.releasedPlatformsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.tagsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.classificationsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.referencesCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.keyWordsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.authorCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.authorsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.imagesCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.releasedPlatformsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.tagsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.classificationsCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.referencesCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    uuid, create_time, update_time, create_user, update_user, title, key_words, author, 
+    authors, file_path, download_url, content_markdown, content_html, release_time, brief, 
+    cover_image, images, word_count, reader_count, likes, dislikes, collection_count, 
+    download_count, comment_count, released_platforms, referenced_count, score, language, 
+    tags, classifications, type, references
+  </sql>
+  <select id="selectByExample" parameterType="com.warmfrog.star.dao.mapper.entity.PostCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from star.post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.warmfrog.star.dao.mapper.entity.PostCriteria">
+    delete from star.post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.warmfrog.star.dao.mapper.entity.Post">
+    insert into star.post (uuid, create_time, update_time, 
+      create_user, update_user, title, 
+      key_words, 
+      author, 
+      authors, 
+      file_path, download_url, content_markdown, 
+      content_html, release_time, brief, 
+      cover_image, images, 
+      word_count, reader_count, likes, 
+      dislikes, collection_count, download_count, 
+      comment_count, released_platforms, 
+      referenced_count, score, language, 
+      tags, 
+      classifications, 
+      type, references
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{keyWords,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
+      #{author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
+      #{authors,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
+      #{filePath,jdbcType=VARCHAR}, #{downloadUrl,jdbcType=VARCHAR}, #{contentMarkdown,jdbcType=VARCHAR}, 
+      #{contentHtml,jdbcType=VARCHAR}, #{releaseTime,jdbcType=TIMESTAMP}, #{brief,jdbcType=VARCHAR}, 
+      #{coverImage,jdbcType=VARCHAR}, #{images,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
+      #{wordCount,jdbcType=INTEGER}, #{readerCount,jdbcType=INTEGER}, #{likes,jdbcType=INTEGER}, 
+      #{dislikes,jdbcType=INTEGER}, #{collectionCount,jdbcType=INTEGER}, #{downloadCount,jdbcType=INTEGER}, 
+      #{commentCount,jdbcType=INTEGER}, #{releasedPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
+      #{referencedCount,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{language,jdbcType=VARCHAR}, 
+      #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
+      #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
+      #{type,jdbcType=SMALLINT}, #{references,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.warmfrog.star.dao.mapper.entity.Post">
+    insert into star.post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="keyWords != null">
+        key_words,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="authors != null">
+        authors,
+      </if>
+      <if test="filePath != null">
+        file_path,
+      </if>
+      <if test="downloadUrl != null">
+        download_url,
+      </if>
+      <if test="contentMarkdown != null">
+        content_markdown,
+      </if>
+      <if test="contentHtml != null">
+        content_html,
+      </if>
+      <if test="releaseTime != null">
+        release_time,
+      </if>
+      <if test="brief != null">
+        brief,
+      </if>
+      <if test="coverImage != null">
+        cover_image,
+      </if>
+      <if test="images != null">
+        images,
+      </if>
+      <if test="wordCount != null">
+        word_count,
+      </if>
+      <if test="readerCount != null">
+        reader_count,
+      </if>
+      <if test="likes != null">
+        likes,
+      </if>
+      <if test="dislikes != null">
+        dislikes,
+      </if>
+      <if test="collectionCount != null">
+        collection_count,
+      </if>
+      <if test="downloadCount != null">
+        download_count,
+      </if>
+      <if test="commentCount != null">
+        comment_count,
+      </if>
+      <if test="releasedPlatforms != null">
+        released_platforms,
+      </if>
+      <if test="referencedCount != null">
+        referenced_count,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="language != null">
+        language,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="classifications != null">
+        classifications,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="references != null">
+        references,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWords != null">
+        #{keyWords,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="authors != null">
+        #{authors,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadUrl != null">
+        #{downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contentMarkdown != null">
+        #{contentMarkdown,jdbcType=VARCHAR},
+      </if>
+      <if test="contentHtml != null">
+        #{contentHtml,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseTime != null">
+        #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="brief != null">
+        #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImage != null">
+        #{coverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        #{images,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="wordCount != null">
+        #{wordCount,jdbcType=INTEGER},
+      </if>
+      <if test="readerCount != null">
+        #{readerCount,jdbcType=INTEGER},
+      </if>
+      <if test="likes != null">
+        #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="dislikes != null">
+        #{dislikes,jdbcType=INTEGER},
+      </if>
+      <if test="collectionCount != null">
+        #{collectionCount,jdbcType=INTEGER},
+      </if>
+      <if test="downloadCount != null">
+        #{downloadCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="releasedPlatforms != null">
+        #{releasedPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="referencedCount != null">
+        #{referencedCount,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="classifications != null">
+        #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="references != null">
+        #{references,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.warmfrog.star.dao.mapper.entity.PostCriteria" resultType="java.lang.Long">
+    select count(*) from star.post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update star.post
+    <set>
+      <if test="record.uuid != null">
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyWords != null">
+        key_words = #{record.keyWords,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="record.author != null">
+        author = #{record.author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="record.authors != null">
+        authors = #{record.authors,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="record.filePath != null">
+        file_path = #{record.filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downloadUrl != null">
+        download_url = #{record.downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contentMarkdown != null">
+        content_markdown = #{record.contentMarkdown,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contentHtml != null">
+        content_html = #{record.contentHtml,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releaseTime != null">
+        release_time = #{record.releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.brief != null">
+        brief = #{record.brief,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coverImage != null">
+        cover_image = #{record.coverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.images != null">
+        images = #{record.images,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="record.wordCount != null">
+        word_count = #{record.wordCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.readerCount != null">
+        reader_count = #{record.readerCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.likes != null">
+        likes = #{record.likes,jdbcType=INTEGER},
+      </if>
+      <if test="record.dislikes != null">
+        dislikes = #{record.dislikes,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectionCount != null">
+        collection_count = #{record.collectionCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.downloadCount != null">
+        download_count = #{record.downloadCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentCount != null">
+        comment_count = #{record.commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.releasedPlatforms != null">
+        released_platforms = #{record.releasedPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="record.referencedCount != null">
+        referenced_count = #{record.referencedCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.score != null">
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.language != null">
+        language = #{record.language,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tags != null">
+        tags = #{record.tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="record.classifications != null">
+        classifications = #{record.classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=SMALLINT},
+      </if>
+      <if test="record.references != null">
+        references = #{record.references,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update star.post
+    set uuid = #{record.uuid,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      key_words = #{record.keyWords,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      author = #{record.author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      authors = #{record.authors,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      file_path = #{record.filePath,jdbcType=VARCHAR},
+      download_url = #{record.downloadUrl,jdbcType=VARCHAR},
+      content_markdown = #{record.contentMarkdown,jdbcType=VARCHAR},
+      content_html = #{record.contentHtml,jdbcType=VARCHAR},
+      release_time = #{record.releaseTime,jdbcType=TIMESTAMP},
+      brief = #{record.brief,jdbcType=VARCHAR},
+      cover_image = #{record.coverImage,jdbcType=VARCHAR},
+      images = #{record.images,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      word_count = #{record.wordCount,jdbcType=INTEGER},
+      reader_count = #{record.readerCount,jdbcType=INTEGER},
+      likes = #{record.likes,jdbcType=INTEGER},
+      dislikes = #{record.dislikes,jdbcType=INTEGER},
+      collection_count = #{record.collectionCount,jdbcType=INTEGER},
+      download_count = #{record.downloadCount,jdbcType=INTEGER},
+      comment_count = #{record.commentCount,jdbcType=INTEGER},
+      released_platforms = #{record.releasedPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      referenced_count = #{record.referencedCount,jdbcType=INTEGER},
+      score = #{record.score,jdbcType=INTEGER},
+      language = #{record.language,jdbcType=VARCHAR},
+      tags = #{record.tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      classifications = #{record.classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      type = #{record.type,jdbcType=SMALLINT},
+      references = #{record.references,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.warmfrog.star.dao.mapper.entity.PostCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from star.post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
