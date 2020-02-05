@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.warmfrog.star.dao.mapper.BookMapper">
   <resultMap id="BaseResultMap" type="com.warmfrog.star.dao.mapper.entity.Book">
-    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
@@ -11,7 +11,7 @@
     <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
     <result column="version" jdbcType="OTHER" property="version" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
     <result column="isbn" jdbcType="VARCHAR" property="isbn" />
-    <result column="author" jdbcType="OTHER" property="author" />
+    <result column="author" jdbcType="OTHER" property="author" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
     <result column="translators" jdbcType="OTHER" property="translators" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
     <result column="producer" jdbcType="VARCHAR" property="producer" />
     <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
@@ -62,6 +62,25 @@
               </choose>
             </foreach>
             <foreach collection="criteria.versionCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.authorCriteria" item="criterion">
               <choose>
                 <when test="criterion.noValue">
                   and ${criterion.condition}
@@ -299,6 +318,25 @@
                 </when>
               </choose>
             </foreach>
+            <foreach collection="criteria.authorCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
             <foreach collection="criteria.translatorsCriteria" item="criterion">
               <choose>
                 <when test="criterion.noValue">
@@ -496,6 +534,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from star.book
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from star.book
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.warmfrog.star.dao.mapper.entity.BookCriteria">
     delete from star.book
     <if test="_parameter != null">
@@ -506,7 +554,8 @@
     insert into star.book (uuid, create_time, update_time, 
       create_user, update_user, title, 
       subtitle, version, 
-      isbn, author, translators, 
+      isbn, author, 
+      translators, 
       producer, thumbnail, cover_images, 
       has_paper, has_ebook, book_design, 
       publisher, publish_date, pages, 
@@ -523,7 +572,8 @@
     values (#{uuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{subtitle,jdbcType=VARCHAR}, #{version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
-      #{isbn,jdbcType=VARCHAR}, #{author,jdbcType=OTHER}, #{translators,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
+      #{isbn,jdbcType=VARCHAR}, #{author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
+      #{translators,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
       #{producer,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, #{coverImages,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
       #{hasPaper,jdbcType=SMALLINT}, #{hasEbook,jdbcType=SMALLINT}, #{bookDesign,jdbcType=VARCHAR}, 
       #{publisher,jdbcType=VARCHAR}, #{publishDate,jdbcType=TIMESTAMP}, #{pages,jdbcType=INTEGER}, 
@@ -673,7 +723,7 @@
         #{isbn,jdbcType=VARCHAR},
       </if>
       <if test="author != null">
-        #{author,jdbcType=OTHER},
+        #{author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
       </if>
       <if test="translators != null">
         #{translators,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
@@ -786,7 +836,7 @@
         isbn = #{record.isbn,jdbcType=VARCHAR},
       </if>
       <if test="record.author != null">
-        author = #{record.author,jdbcType=OTHER},
+        author = #{record.author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
       </if>
       <if test="record.translators != null">
         translators = #{record.translators,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
@@ -876,7 +926,7 @@
       subtitle = #{record.subtitle,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
       isbn = #{record.isbn,jdbcType=VARCHAR},
-      author = #{record.author,jdbcType=OTHER},
+      author = #{record.author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
       translators = #{record.translators,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
       producer = #{record.producer,jdbcType=VARCHAR},
       thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
@@ -904,6 +954,148 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warmfrog.star.dao.mapper.entity.Book">
+    update star.book
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="isbn != null">
+        isbn = #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="translators != null">
+        translators = #{translators,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="producer != null">
+        producer = #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnail != null">
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImages != null">
+        cover_images = #{coverImages,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="hasPaper != null">
+        has_paper = #{hasPaper,jdbcType=SMALLINT},
+      </if>
+      <if test="hasEbook != null">
+        has_ebook = #{hasEbook,jdbcType=SMALLINT},
+      </if>
+      <if test="bookDesign != null">
+        book_design = #{bookDesign,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null">
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null">
+        publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pages != null">
+        pages = #{pages,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="brief != null">
+        brief = #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="catalog != null">
+        catalog = #{catalog,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="classifications != null">
+        classifications = #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="downloadLinks != null">
+        download_links = #{downloadLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="paperPurchaseLinks != null">
+        paper_purchase_links = #{paperPurchaseLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="ebookPurchaseLinks != null">
+        ebook_purchase_links = #{ebookPurchaseLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="douban != null">
+        douban = #{douban,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="readingCount != null">
+        reading_count = #{readingCount,jdbcType=INTEGER},
+      </if>
+      <if test="wantReadCount != null">
+        want_read_count = #{wantReadCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warmfrog.star.dao.mapper.entity.Book">
+    update star.book
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      version = #{version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      isbn = #{isbn,jdbcType=VARCHAR},
+      author = #{author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      translators = #{translators,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      producer = #{producer,jdbcType=VARCHAR},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      cover_images = #{coverImages,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      has_paper = #{hasPaper,jdbcType=SMALLINT},
+      has_ebook = #{hasEbook,jdbcType=SMALLINT},
+      book_design = #{bookDesign,jdbcType=VARCHAR},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      pages = #{pages,jdbcType=INTEGER},
+      price = #{price,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      brief = #{brief,jdbcType=VARCHAR},
+      catalog = #{catalog,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      score = #{score,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      classifications = #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      download_links = #{downloadLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      paper_purchase_links = #{paperPurchaseLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      ebook_purchase_links = #{ebookPurchaseLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      douban = #{douban,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      read_count = #{readCount,jdbcType=INTEGER},
+      reading_count = #{readingCount,jdbcType=INTEGER},
+      want_read_count = #{wantReadCount,jdbcType=INTEGER}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.warmfrog.star.dao.mapper.entity.BookCriteria" resultMap="BaseResultMap">
     select

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.warmfrog.star.dao.mapper.MovieMapper">
   <resultMap id="BaseResultMap" type="com.warmfrog.star.dao.mapper.entity.Movie">
-    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
@@ -525,6 +525,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from star.movie
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from star.movie
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.warmfrog.star.dao.mapper.entity.MovieCriteria">
     delete from star.movie
     <if test="_parameter != null">
@@ -849,6 +859,116 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warmfrog.star.dao.mapper.entity.Movie">
+    update star.movie
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="screenshots != null">
+        screenshots = #{screenshots,jdbcType=ARRAY},
+      </if>
+      <if test="cover != null">
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="classifications != null">
+        classifications = #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="director != null">
+        director = #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="leadingRoles != null">
+        leading_roles = #{leadingRoles,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="screenwriters != null">
+        screenwriters = #{screenwriters,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="madein != null">
+        madein = #{madein,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="showingDate != null">
+        showing_date = #{showingDate,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="languages != null">
+        languages = #{languages,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null">
+        length = #{length,jdbcType=BIGINT},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="downloadLinks != null">
+        download_links = #{downloadLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="playLinks != null">
+        play_links = #{playLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="alias != null">
+        alias = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="brief != null">
+        brief = #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="douban != null">
+        douban = #{douban,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="imdb != null">
+        imdb = #{imdb,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warmfrog.star.dao.mapper.entity.Movie">
+    update star.movie
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      year = #{year,jdbcType=INTEGER},
+      tags = #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      screenshots = #{screenshots,jdbcType=ARRAY},
+      cover = #{cover,jdbcType=VARCHAR},
+      classifications = #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      director = #{director,jdbcType=VARCHAR},
+      leading_roles = #{leadingRoles,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      screenwriters = #{screenwriters,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      madein = #{madein,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      showing_date = #{showingDate,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      languages = #{languages,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      score = #{score,jdbcType=VARCHAR},
+      length = #{length,jdbcType=BIGINT},
+      size = #{size,jdbcType=BIGINT},
+      download_links = #{downloadLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      play_links = #{playLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      alias = #{alias,jdbcType=VARCHAR},
+      brief = #{brief,jdbcType=VARCHAR},
+      douban = #{douban,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      imdb = #{imdb,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.warmfrog.star.dao.mapper.entity.MovieCriteria" resultMap="BaseResultMap">
     select

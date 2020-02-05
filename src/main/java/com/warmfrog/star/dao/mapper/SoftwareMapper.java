@@ -11,6 +11,8 @@ public interface SoftwareMapper {
 
     int deleteByExample(SoftwareCriteria example);
 
+    int deleteByPrimaryKey(String uuid);
+
     int insert(Software record);
 
     int insertSelective(Software record);
@@ -19,7 +21,13 @@ public interface SoftwareMapper {
 
     List<Software> selectByExample(SoftwareCriteria example);
 
+    Software selectByPrimaryKey(String uuid);
+
     int updateByExampleSelective(@Param("record") Software record, @Param("example") SoftwareCriteria example);
 
     int updateByExample(@Param("record") Software record, @Param("example") SoftwareCriteria example);
+
+    int updateByPrimaryKeySelective(Software record);
+
+    int updateByPrimaryKey(Software record);
 }

@@ -67,6 +67,8 @@ public class BookCriteria {
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> versionCriteria;
 
+        protected List<Criterion> authorCriteria;
+
         protected List<Criterion> translatorsCriteria;
 
         protected List<Criterion> coverImagesCriteria;
@@ -93,6 +95,7 @@ public class BookCriteria {
             super();
             criteria = new ArrayList<Criterion>();
             versionCriteria = new ArrayList<Criterion>();
+            authorCriteria = new ArrayList<Criterion>();
             translatorsCriteria = new ArrayList<Criterion>();
             coverImagesCriteria = new ArrayList<Criterion>();
             catalogCriteria = new ArrayList<Criterion>();
@@ -121,6 +124,26 @@ public class BookCriteria {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             versionCriteria.add(new Criterion(condition, value1, value2, "com.warmfrog.star.dao.handler.JsonTypeHandler"));
+            allCriteria = null;
+        }
+
+        public List<Criterion> getAuthorCriteria() {
+            return authorCriteria;
+        }
+
+        protected void addAuthorCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            authorCriteria.add(new Criterion(condition, value, "com.warmfrog.star.dao.handler.JsonTypeHandler"));
+            allCriteria = null;
+        }
+
+        protected void addAuthorCriterion(String condition, Object value1, Object value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            authorCriteria.add(new Criterion(condition, value1, value2, "com.warmfrog.star.dao.handler.JsonTypeHandler"));
             allCriteria = null;
         }
 
@@ -307,6 +330,7 @@ public class BookCriteria {
         public boolean isValid() {
             return criteria.size() > 0
                 || versionCriteria.size() > 0
+                || authorCriteria.size() > 0
                 || translatorsCriteria.size() > 0
                 || coverImagesCriteria.size() > 0
                 || catalogCriteria.size() > 0
@@ -323,6 +347,7 @@ public class BookCriteria {
                 allCriteria = new ArrayList<Criterion>();
                 allCriteria.addAll(criteria);
                 allCriteria.addAll(versionCriteria);
+                allCriteria.addAll(authorCriteria);
                 allCriteria.addAll(translatorsCriteria);
                 allCriteria.addAll(coverImagesCriteria);
                 allCriteria.addAll(catalogCriteria);
@@ -975,52 +1000,52 @@ public class BookCriteria {
         }
 
         public Criteria andAuthorEqualTo(Object value) {
-            addCriterion("author =", value, "author");
+            addAuthorCriterion("author =", value, "author");
             return (Criteria) this;
         }
 
         public Criteria andAuthorNotEqualTo(Object value) {
-            addCriterion("author <>", value, "author");
+            addAuthorCriterion("author <>", value, "author");
             return (Criteria) this;
         }
 
         public Criteria andAuthorGreaterThan(Object value) {
-            addCriterion("author >", value, "author");
+            addAuthorCriterion("author >", value, "author");
             return (Criteria) this;
         }
 
         public Criteria andAuthorGreaterThanOrEqualTo(Object value) {
-            addCriterion("author >=", value, "author");
+            addAuthorCriterion("author >=", value, "author");
             return (Criteria) this;
         }
 
         public Criteria andAuthorLessThan(Object value) {
-            addCriterion("author <", value, "author");
+            addAuthorCriterion("author <", value, "author");
             return (Criteria) this;
         }
 
         public Criteria andAuthorLessThanOrEqualTo(Object value) {
-            addCriterion("author <=", value, "author");
+            addAuthorCriterion("author <=", value, "author");
             return (Criteria) this;
         }
 
         public Criteria andAuthorIn(List<Object> values) {
-            addCriterion("author in", values, "author");
+            addAuthorCriterion("author in", values, "author");
             return (Criteria) this;
         }
 
         public Criteria andAuthorNotIn(List<Object> values) {
-            addCriterion("author not in", values, "author");
+            addAuthorCriterion("author not in", values, "author");
             return (Criteria) this;
         }
 
         public Criteria andAuthorBetween(Object value1, Object value2) {
-            addCriterion("author between", value1, value2, "author");
+            addAuthorCriterion("author between", value1, value2, "author");
             return (Criteria) this;
         }
 
         public Criteria andAuthorNotBetween(Object value1, Object value2) {
-            addCriterion("author not between", value1, value2, "author");
+            addAuthorCriterion("author not between", value1, value2, "author");
             return (Criteria) this;
         }
 

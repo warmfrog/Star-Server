@@ -11,6 +11,8 @@ public interface PostMapper {
 
     int deleteByExample(PostCriteria example);
 
+    int deleteByPrimaryKey(String uuid);
+
     int insert(Post record);
 
     int insertSelective(Post record);
@@ -19,7 +21,13 @@ public interface PostMapper {
 
     List<Post> selectByExample(PostCriteria example);
 
+    Post selectByPrimaryKey(String uuid);
+
     int updateByExampleSelective(@Param("record") Post record, @Param("example") PostCriteria example);
 
     int updateByExample(@Param("record") Post record, @Param("example") PostCriteria example);
+
+    int updateByPrimaryKeySelective(Post record);
+
+    int updateByPrimaryKey(Post record);
 }

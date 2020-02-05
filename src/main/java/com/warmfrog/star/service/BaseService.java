@@ -1,5 +1,7 @@
 package com.warmfrog.star.service;
 
+import com.github.pagehelper.PageInfo;
+
 import java.util.List;
 
 /**
@@ -7,10 +9,10 @@ import java.util.List;
  * @date 2020/2/4
  */
 public interface BaseService<Dto, Vo> {
-    void add(Dto dto);
+    void insert(Dto dto);
     void update(Dto dto);
-    void delete(String uuid);
-    Vo get(String uuid);
+    void delete(Dto dto);
+    Vo get(Dto dto);
     List<Vo> list(Dto dto);
-    List<Vo> listByPage(Dto dto);
+    PageInfo<Vo> listByPage(Dto dto);
 }

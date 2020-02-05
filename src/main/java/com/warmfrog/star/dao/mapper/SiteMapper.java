@@ -11,6 +11,8 @@ public interface SiteMapper {
 
     int deleteByExample(SiteCriteria example);
 
+    int deleteByPrimaryKey(String uuid);
+
     int insert(Site record);
 
     int insertSelective(Site record);
@@ -19,7 +21,13 @@ public interface SiteMapper {
 
     List<Site> selectByExample(SiteCriteria example);
 
+    Site selectByPrimaryKey(String uuid);
+
     int updateByExampleSelective(@Param("record") Site record, @Param("example") SiteCriteria example);
 
     int updateByExample(@Param("record") Site record, @Param("example") SiteCriteria example);
+
+    int updateByPrimaryKeySelective(Site record);
+
+    int updateByPrimaryKey(Site record);
 }

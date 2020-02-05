@@ -11,6 +11,8 @@ public interface MenuMapper {
 
     int deleteByExample(MenuCriteria example);
 
+    int deleteByPrimaryKey(String uuid);
+
     int insert(Menu record);
 
     int insertSelective(Menu record);
@@ -19,7 +21,13 @@ public interface MenuMapper {
 
     List<Menu> selectByExample(MenuCriteria example);
 
+    Menu selectByPrimaryKey(String uuid);
+
     int updateByExampleSelective(@Param("record") Menu record, @Param("example") MenuCriteria example);
 
     int updateByExample(@Param("record") Menu record, @Param("example") MenuCriteria example);
+
+    int updateByPrimaryKeySelective(Menu record);
+
+    int updateByPrimaryKey(Menu record);
 }

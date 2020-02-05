@@ -1,12 +1,19 @@
 package com.warmfrog.star.service.impl;
 
+import com.github.pagehelper.PageInfo;
+import com.warmfrog.star.common.builder.PostBuilder;
+import com.warmfrog.star.common.dto.PostDto;
+import com.warmfrog.star.common.vo.PostVo;
 import com.warmfrog.star.dao.PostDao;
-import com.warmfrog.star.dto.PostDto;
+import com.warmfrog.star.dao.mapper.entity.Post;
+import com.warmfrog.star.dao.mapper.entity.PostCriteria;
 import com.warmfrog.star.service.PostService;
-import com.warmfrog.star.vo.PostVo;
+import org.apache.ibatis.session.RowBounds;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,27 +25,58 @@ public class PostServiceImpl implements PostService {
     @Autowired
     PostDao postDao;
 
-    public void add(PostDto postDto) {
-
+    public void insert(PostDto postDto) {
+        postDao.getMapper().insertSelective(PostBuilder.buildInsert(postDto));
     }
 
     public void update(PostDto postDto) {
-
+        postDao.getMapper().updateByPrimaryKeySelective(PostBuilder.buildUpdate(postDto));
     }
 
-    public void delete(String uuid) {
-
+    public void delete(PostDto postDto) {
+        postDao.getMapper().deleteByPrimaryKey(postDto.getUuid());
     }
 
-    public PostVo get(String uuid) {
-        return null;
+    public PostVo get(PostDto postDto) {
+        Post post = postDao.getMapper().selectByPrimaryKey(postDto.getUuid());
+        PostVo postVo = new PostVo();
+        BeanUtils.copyProperties(post, postVo);
+        return postVo;
     }
 
     public List<PostVo> list(PostDto postDto) {
-        return null;
+        PostCriteria example = new PostCriteria();
+        example.createCriteria();
+        List<Post> posts = postDao.getMapper().selectByExample(example);
+
+        List<PostVo> postVoList = getPostVos(posts);
+
+        return postVoList;
     }
 
-    public List<PostVo> listByPage(PostDto postDto) {
-        return null;
+    private List<PostVo> getPostVos(List<Post> posts) {
+        List<PostVo> postVoList = new ArrayList<PostVo>();
+        posts.forEach(post -> {
+            PostVo postVo = new PostVo();
+            BeanUtils.copyProperties(post, postVo);
+            postVoList.add(postVo);
+        });
+        return postVoList;
     }
+
+    public PageInfo<PostVo> listByPage(PostDto postDto) {
+        PageInfo<PostVo> postVos = new PageInfo<>();
+        RowBounds rowBounds = new RowBounds((postDto.getCurrentPage() - 1) * postDto.getPageSize(), postDto.getPageSize());
+        PostCriteria example = new PostCriteria();
+        example.createCriteria();
+
+        long count = postDao.getMapper().countByExample(example);
+        List<Post> posts = postDao.getMapper().selectByExampleWithRowbounds(example, rowBounds);
+        postVos.setList(getPostVos(posts));
+        postVos.setTotal(count);
+        postVos.setPageNum(postDto.getPageSize());
+        postVos.setPageSize(postDto.getPageSize());
+        return postVos;
+    }
+
 }

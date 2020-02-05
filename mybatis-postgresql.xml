@@ -55,11 +55,9 @@
 							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
 			<columnOverride column="classifications" jdbcType="OTHER"
 							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="screenshots" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
 			<columnOverride column="version" jdbcType="OTHER"
 							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="autor" jdbcType="OTHER"
+			<columnOverride column="author" jdbcType="OTHER"
 							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
 			<columnOverride column="translators" jdbcType="OTHER"
 							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>

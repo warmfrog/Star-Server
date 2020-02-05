@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.warmfrog.star.dao.mapper.SoftwareMapper">
   <resultMap id="BaseResultMap" type="com.warmfrog.star.dao.mapper.entity.Software">
-    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
@@ -377,6 +377,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from star.software
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from star.software
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.warmfrog.star.dao.mapper.entity.SoftwareCriteria">
     delete from star.software
     <if test="_parameter != null">
@@ -739,6 +749,132 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.warmfrog.star.dao.mapper.entity.Software">
+    update star.software
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="softwareName != null">
+        software_name = #{softwareName,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="developer != null">
+        developer = #{developer,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="md5 != null">
+        md5 = #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="officialSite != null">
+        official_site = #{officialSite,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="screenshots != null">
+        screenshots = #{screenshots,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="classifications != null">
+        classifications = #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="free != null">
+        free = #{free,jdbcType=SMALLINT},
+      </if>
+      <if test="likes != null">
+        likes = #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="dislikes != null">
+        dislikes = #{dislikes,jdbcType=SMALLINT},
+      </if>
+      <if test="openSource != null">
+        open_source = #{openSource,jdbcType=SMALLINT},
+      </if>
+      <if test="git != null">
+        git = #{git,jdbcType=VARCHAR},
+      </if>
+      <if test="distPlatforms != null">
+        dist_platforms = #{distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="downloadLink != null">
+        download_link = #{downloadLink,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadLinks != null">
+        download_links = #{downloadLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+      <if test="tutorials != null">
+        tutorials = #{tutorials,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="histories != null">
+        histories = #{histories,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.warmfrog.star.dao.mapper.entity.Software">
+    update star.software
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      software_name = #{softwareName,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      developer = #{developer,jdbcType=VARCHAR},
+      size = #{size,jdbcType=BIGINT},
+      md5 = #{md5,jdbcType=VARCHAR},
+      official_site = #{officialSite,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      screenshots = #{screenshots,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      tags = #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      classifications = #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      score = #{score,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      free = #{free,jdbcType=SMALLINT},
+      likes = #{likes,jdbcType=INTEGER},
+      dislikes = #{dislikes,jdbcType=SMALLINT},
+      open_source = #{openSource,jdbcType=SMALLINT},
+      git = #{git,jdbcType=VARCHAR},
+      dist_platforms = #{distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      download_link = #{downloadLink,jdbcType=VARCHAR},
+      download_links = #{downloadLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      tutorials = #{tutorials,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      remark = #{remark,jdbcType=VARCHAR},
+      histories = #{histories,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.warmfrog.star.dao.mapper.entity.SoftwareCriteria" resultMap="BaseResultMap">
     select

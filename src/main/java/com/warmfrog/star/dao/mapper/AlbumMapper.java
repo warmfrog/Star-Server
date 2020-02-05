@@ -11,6 +11,8 @@ public interface AlbumMapper {
 
     int deleteByExample(AlbumCriteria example);
 
+    int deleteByPrimaryKey(String uuid);
+
     int insert(Album record);
 
     int insertSelective(Album record);
@@ -19,7 +21,13 @@ public interface AlbumMapper {
 
     List<Album> selectByExample(AlbumCriteria example);
 
+    Album selectByPrimaryKey(String uuid);
+
     int updateByExampleSelective(@Param("record") Album record, @Param("example") AlbumCriteria example);
 
     int updateByExample(@Param("record") Album record, @Param("example") AlbumCriteria example);
+
+    int updateByPrimaryKeySelective(Album record);
+
+    int updateByPrimaryKey(Album record);
 }

@@ -11,6 +11,8 @@ public interface MovieMapper {
 
     int deleteByExample(MovieCriteria example);
 
+    int deleteByPrimaryKey(String uuid);
+
     int insert(Movie record);
 
     int insertSelective(Movie record);
@@ -19,7 +21,13 @@ public interface MovieMapper {
 
     List<Movie> selectByExample(MovieCriteria example);
 
+    Movie selectByPrimaryKey(String uuid);
+
     int updateByExampleSelective(@Param("record") Movie record, @Param("example") MovieCriteria example);
 
     int updateByExample(@Param("record") Movie record, @Param("example") MovieCriteria example);
+
+    int updateByPrimaryKeySelective(Movie record);
+
+    int updateByPrimaryKey(Movie record);
 }
