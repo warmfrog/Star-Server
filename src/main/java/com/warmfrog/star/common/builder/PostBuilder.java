@@ -14,12 +14,26 @@ public class PostBuilder {
         Post post = new Post();
         BeanUtils.copyProperties(postDto, post, "references");
         post.setUuid(UUIDUtil.getUUID());
+        post.setKeyWords(postDto.getKeyWords());
+        post.setAuthors(postDto.getAuthors());
+        post.setImages(postDto.getImages());
+        post.setReleasedPlatforms(postDto.getReleasedPlatforms());
+        post.setTags(postDto.getTags());
+        post.setClassifications(postDto.getClassifications());
+        post.setCites(postDto.getCites());
         return post;
     }
 
     public static  Post buildUpdate(PostDto postDto){
         Post post = new Post();
         BeanUtils.copyProperties(postDto, post);
+        post.setKeyWords(postDto.getKeyWords());
+        post.setAuthors(postDto.getAuthors());
+        post.setImages(postDto.getImages());
+        post.setReleasedPlatforms(postDto.getReleasedPlatforms());
+        post.setTags(postDto.getTags());
+        post.setClassifications(postDto.getClassifications());
+        post.setCites(postDto.getCites());
         return post;
     }
 

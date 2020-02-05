@@ -26,7 +26,8 @@ create table "star"."post"(
   "tags" varchar(32)[],
   "classifications" varchar(32)[],
   "type" smallint,
-  "references" jsonb
+  "cites" jsonb,
+	CONSTRAINT "post_pkey" PRIMARY key("uuid")
 ) inherits("star"."base");
 
 comment on column "star"."post"."title" is '博文标题';
@@ -54,4 +55,4 @@ comment on column "star"."post"."language" is '语言';
 comment on column "star"."post"."tags" is '标签';
 comment on column "star"."post"."classifications" is '分类';
 comment on column "star"."post"."type" is '0:原创，1:转载';
-comment on column "star"."post"."references" is '引用列表';
+comment on column "star"."post"."cites" is '引用列表';

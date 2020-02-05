@@ -5,7 +5,8 @@ create table "star"."menu"(
   "icon" varchar(32),
   "bg_color" varchar(32),
   "url" varchar(256),
-  "rank" int
+  "rank" int,
+	CONSTRAINT "menu_pkey" PRIMARY key("uuid")
 )inherits("star"."base");
 
 comment on column "star"."menu"."name" is '菜单名称';

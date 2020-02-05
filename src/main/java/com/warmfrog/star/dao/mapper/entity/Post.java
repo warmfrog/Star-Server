@@ -65,7 +65,7 @@ public class Post {
 
     private Short type;
 
-    private Object references;
+    private Object cites;
 
     public String getUuid() {
         return uuid;
@@ -315,12 +315,12 @@ public class Post {
         this.type = type;
     }
 
-    public Object getReferences() {
-        return references;
+    public Object getCites() {
+        return cites;
     }
 
-    public void setReferences(Object references) {
-        this.references = references;
+    public void setCites(Object cites) {
+        this.cites = cites;
     }
 
     @Override
@@ -366,7 +366,7 @@ public class Post {
             && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
             && (this.getClassifications() == null ? other.getClassifications() == null : this.getClassifications().equals(other.getClassifications()))
             && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-            && (this.getReferences() == null ? other.getReferences() == null : this.getReferences().equals(other.getReferences()));
+            && (this.getCites() == null ? other.getCites() == null : this.getCites().equals(other.getCites()));
     }
 
     @Override
@@ -404,7 +404,7 @@ public class Post {
         result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());
         result = prime * result + ((getClassifications() == null) ? 0 : getClassifications().hashCode());
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
-        result = prime * result + ((getReferences() == null) ? 0 : getReferences().hashCode());
+        result = prime * result + ((getCites() == null) ? 0 : getCites().hashCode());
         return result;
     }
 
@@ -445,7 +445,7 @@ public class Post {
         sb.append(", tags=").append(tags);
         sb.append(", classifications=").append(classifications);
         sb.append(", type=").append(type);
-        sb.append(", references=").append(references);
+        sb.append(", cites=").append(cites);
         sb.append("]");
         return sb.toString();
     }

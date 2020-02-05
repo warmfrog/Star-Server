@@ -1,9 +1,7 @@
 package com.warmfrog.star.common.dto;
 
-import com.github.pagehelper.Page;
-
-import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author libo
@@ -24,11 +22,11 @@ public class PostDto extends PageDto {
 
     private String title;
 
-    private Object keyWords;
+    private String[] keyWords;
 
-    private Object author;
+    private Author author;
 
-    private Object authors;
+    private List<Author> authors;
 
     private String filePath;
 
@@ -44,7 +42,7 @@ public class PostDto extends PageDto {
 
     private String coverImage;
 
-    private Object images;
+    private String[] images;
 
     private Integer wordCount;
 
@@ -60,7 +58,7 @@ public class PostDto extends PageDto {
 
     private Integer commentCount;
 
-    private Object releasedPlatforms;
+    private List<ReleasedPlatform> releasedPlatforms;
 
     private Integer referencedCount;
 
@@ -68,13 +66,13 @@ public class PostDto extends PageDto {
 
     private String language;
 
-    private Object tags;
+    private String[] tags;
 
-    private Object classifications;
+    private String[] classifications;
 
     private Short type;
 
-    private Object references;
+    private List<Cite> cites;
 
     public String getUuid() {
         return uuid;
@@ -122,30 +120,6 @@ public class PostDto extends PageDto {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Object getKeyWords() {
-        return keyWords;
-    }
-
-    public void setKeyWords(Object keyWords) {
-        this.keyWords = keyWords;
-    }
-
-    public Object getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Object author) {
-        this.author = author;
-    }
-
-    public Object getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Object authors) {
-        this.authors = authors;
     }
 
     public String getFilePath() {
@@ -204,14 +178,6 @@ public class PostDto extends PageDto {
         this.coverImage = coverImage;
     }
 
-    public Object getImages() {
-        return images;
-    }
-
-    public void setImages(Object images) {
-        this.images = images;
-    }
-
     public Integer getWordCount() {
         return wordCount;
     }
@@ -268,14 +234,6 @@ public class PostDto extends PageDto {
         this.commentCount = commentCount;
     }
 
-    public Object getReleasedPlatforms() {
-        return releasedPlatforms;
-    }
-
-    public void setReleasedPlatforms(Object releasedPlatforms) {
-        this.releasedPlatforms = releasedPlatforms;
-    }
-
     public Integer getReferencedCount() {
         return referencedCount;
     }
@@ -300,22 +258,6 @@ public class PostDto extends PageDto {
         this.language = language;
     }
 
-    public Object getTags() {
-        return tags;
-    }
-
-    public void setTags(Object tags) {
-        this.tags = tags;
-    }
-
-    public Object getClassifications() {
-        return classifications;
-    }
-
-    public void setClassifications(Object classifications) {
-        this.classifications = classifications;
-    }
-
     public Short getType() {
         return type;
     }
@@ -324,11 +266,176 @@ public class PostDto extends PageDto {
         this.type = type;
     }
 
-    public Object getReferences() {
-        return references;
+    public String[] getImages() {
+        return images;
     }
 
-    public void setReferences(Object references) {
-        this.references = references;
+    public void setImages(String[] images) {
+        this.images = images;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
+    }
+
+    public String[] getClassifications() {
+        return classifications;
+    }
+
+    public void setClassifications(String[] classifications) {
+        this.classifications = classifications;
+    }
+
+    public String[] getKeyWords() {
+        return keyWords;
+    }
+
+    public void setKeyWords(String[] keyWords) {
+        this.keyWords = keyWords;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+
+
+    public List<ReleasedPlatform> getReleasedPlatforms() {
+        return releasedPlatforms;
+    }
+
+    public void setReleasedPlatforms(List<ReleasedPlatform> releasedPlatforms) {
+        this.releasedPlatforms = releasedPlatforms;
+    }
+
+    public List<Cite> getCites() {
+        return cites;
+    }
+
+    public void setCites(List<Cite> cites) {
+        this.cites = cites;
+    }
+
+    public static class Author {
+        private String name;
+        private String email;
+        private String institution;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getInstitution() {
+            return institution;
+        }
+
+        public void setInstitution(String institution) {
+            this.institution = institution;
+        }
+    }
+
+    public static class ReleasedPlatform {
+        private String platform;
+        private String platformUrl;
+        private String postUrl;
+
+        public String getPlatform() {
+            return platform;
+        }
+
+        public void setPlatform(String platform) {
+            this.platform = platform;
+        }
+
+        public String getPlatformUrl() {
+            return platformUrl;
+        }
+
+        public void setPlatformUrl(String platformUrl) {
+            this.platformUrl = platformUrl;
+        }
+
+        public String getPostUrl() {
+            return postUrl;
+        }
+
+        public void setPostUrl(String postUrl) {
+            this.postUrl = postUrl;
+        }
+    }
+
+    public static class Cite {
+        private String author;
+        private String articleName;
+        private String source;
+        private String url;
+        private Date releaseTime;
+
+        public String getAuthor() {
+            return author;
+        }
+
+        public void setAuthor(String author) {
+            this.author = author;
+        }
+
+        public String getArticleName() {
+            return articleName;
+        }
+
+        public void setArticleName(String articleName) {
+            this.articleName = articleName;
+        }
+
+        public String getSource() {
+            return source;
+        }
+
+        public void setSource(String source) {
+            this.source = source;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public Date getReleaseTime() {
+            return releaseTime;
+        }
+
+        public void setReleaseTime(Date releaseTime) {
+            this.releaseTime = releaseTime;
+        }
     }
 }

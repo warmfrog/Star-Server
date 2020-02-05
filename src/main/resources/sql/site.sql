@@ -7,7 +7,8 @@ create table "star"."site"(
   "thumbnail" varchar(256),
   "screenshots" varchar(256)[],
   "need_vpn" smallint,
-  "language" varchar(32)
+  "language" varchar(32),
+	CONSTRAINT "site_pkey" PRIMARY key("uuid")
 )
 inherits ("star"."base");
 

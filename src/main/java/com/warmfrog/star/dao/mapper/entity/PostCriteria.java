@@ -79,8 +79,6 @@ public class PostCriteria {
 
         protected List<Criterion> classificationsCriteria;
 
-        protected List<Criterion> referencesCriteria;
-
         protected List<Criterion> allCriteria;
 
         protected List<Criterion> criteria;
@@ -95,7 +93,6 @@ public class PostCriteria {
             releasedPlatformsCriteria = new ArrayList<Criterion>();
             tagsCriteria = new ArrayList<Criterion>();
             classificationsCriteria = new ArrayList<Criterion>();
-            referencesCriteria = new ArrayList<Criterion>();
         }
 
         public List<Criterion> getKeyWordsCriteria() {
@@ -238,26 +235,6 @@ public class PostCriteria {
             allCriteria = null;
         }
 
-        public List<Criterion> getReferencesCriteria() {
-            return referencesCriteria;
-        }
-
-        protected void addReferencesCriterion(String condition, Object value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            referencesCriteria.add(new Criterion(condition, value, "com.warmfrog.star.dao.handler.JsonTypeHandler"));
-            allCriteria = null;
-        }
-
-        protected void addReferencesCriterion(String condition, Object value1, Object value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            referencesCriteria.add(new Criterion(condition, value1, value2, "com.warmfrog.star.dao.handler.JsonTypeHandler"));
-            allCriteria = null;
-        }
-
         public boolean isValid() {
             return criteria.size() > 0
                 || keyWordsCriteria.size() > 0
@@ -266,8 +243,7 @@ public class PostCriteria {
                 || imagesCriteria.size() > 0
                 || releasedPlatformsCriteria.size() > 0
                 || tagsCriteria.size() > 0
-                || classificationsCriteria.size() > 0
-                || referencesCriteria.size() > 0;
+                || classificationsCriteria.size() > 0;
         }
 
         public List<Criterion> getAllCriteria() {
@@ -281,7 +257,6 @@ public class PostCriteria {
                 allCriteria.addAll(releasedPlatformsCriteria);
                 allCriteria.addAll(tagsCriteria);
                 allCriteria.addAll(classificationsCriteria);
-                allCriteria.addAll(referencesCriteria);
             }
             return allCriteria;
         }
@@ -2284,63 +2259,63 @@ public class PostCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andReferencesIsNull() {
-            addCriterion("references is null");
+        public Criteria andCitesIsNull() {
+            addCriterion("cites is null");
             return (Criteria) this;
         }
 
-        public Criteria andReferencesIsNotNull() {
-            addCriterion("references is not null");
+        public Criteria andCitesIsNotNull() {
+            addCriterion("cites is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReferencesEqualTo(Object value) {
-            addReferencesCriterion("references =", value, "references");
+        public Criteria andCitesEqualTo(Object value) {
+            addCriterion("cites =", value, "cites");
             return (Criteria) this;
         }
 
-        public Criteria andReferencesNotEqualTo(Object value) {
-            addReferencesCriterion("references <>", value, "references");
+        public Criteria andCitesNotEqualTo(Object value) {
+            addCriterion("cites <>", value, "cites");
             return (Criteria) this;
         }
 
-        public Criteria andReferencesGreaterThan(Object value) {
-            addReferencesCriterion("references >", value, "references");
+        public Criteria andCitesGreaterThan(Object value) {
+            addCriterion("cites >", value, "cites");
             return (Criteria) this;
         }
 
-        public Criteria andReferencesGreaterThanOrEqualTo(Object value) {
-            addReferencesCriterion("references >=", value, "references");
+        public Criteria andCitesGreaterThanOrEqualTo(Object value) {
+            addCriterion("cites >=", value, "cites");
             return (Criteria) this;
         }
 
-        public Criteria andReferencesLessThan(Object value) {
-            addReferencesCriterion("references <", value, "references");
+        public Criteria andCitesLessThan(Object value) {
+            addCriterion("cites <", value, "cites");
             return (Criteria) this;
         }
 
-        public Criteria andReferencesLessThanOrEqualTo(Object value) {
-            addReferencesCriterion("references <=", value, "references");
+        public Criteria andCitesLessThanOrEqualTo(Object value) {
+            addCriterion("cites <=", value, "cites");
             return (Criteria) this;
         }
 
-        public Criteria andReferencesIn(List<Object> values) {
-            addReferencesCriterion("references in", values, "references");
+        public Criteria andCitesIn(List<Object> values) {
+            addCriterion("cites in", values, "cites");
             return (Criteria) this;
         }
 
-        public Criteria andReferencesNotIn(List<Object> values) {
-            addReferencesCriterion("references not in", values, "references");
+        public Criteria andCitesNotIn(List<Object> values) {
+            addCriterion("cites not in", values, "cites");
             return (Criteria) this;
         }
 
-        public Criteria andReferencesBetween(Object value1, Object value2) {
-            addReferencesCriterion("references between", value1, value2, "references");
+        public Criteria andCitesBetween(Object value1, Object value2) {
+            addCriterion("cites between", value1, value2, "cites");
             return (Criteria) this;
         }
 
-        public Criteria andReferencesNotBetween(Object value1, Object value2) {
-            addReferencesCriterion("references not between", value1, value2, "references");
+        public Criteria andCitesNotBetween(Object value1, Object value2) {
+            addCriterion("cites not between", value1, value2, "cites");
             return (Criteria) this;
         }
     }

@@ -24,7 +24,8 @@ create table "star"."software"(
   "download_links" jsonb,
   "tutorials" varchar(256)[],
   "remark" varchar(256),
-  "histories" jsonb
+  "histories" jsonb,
+	CONSTRAINT "software_pkey" PRIMARY key("uuid")
 )
 inherits("star"."base");
 

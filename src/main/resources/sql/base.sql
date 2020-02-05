@@ -1,10 +1,10 @@
 drop table if exists base;
 create table base (
-  "uuid" varchar(32) not null,
-  "create_time" timestamp(6) default current_timestamp,
-  "update_time" timestamp(6) default current_timestamp,
-  "create_user" varchar(64),
-  "update_user" varchar(64),
+  "uuid" varchar(32) not null, -- uuid
+  "create_time" timestamp(6) default current_timestamp, -- 创建时间,
+  "update_time" timestamp(6) default current_timestamp, -- 更新时间,
+  "create_user" varchar(64), -- 创建用户
+  "update_user" varchar(64), --更新用户
   constraint "base_pkey" primary key ("uuid")
 );
 

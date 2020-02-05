@@ -20,7 +20,8 @@ create table "star"."movie"(
   "alias" varchar(64),
   "brief" varchar(1024),
   "douban" jsonb,
-  "imdb" jsonb
+  "imdb" jsonb,
+	CONSTRAINT "movie_pkey" PRIMARY key("uuid")
 ) inherits ("star"."base");
 
 comment on column "star"."movie"."name" is '电影名';

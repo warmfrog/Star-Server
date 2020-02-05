@@ -28,7 +28,8 @@ create table "star"."book"(
   "douban" jsonb,
   "read_count" int,
   "reading_count" int,
-  "want_read_count" int
+  "want_read_count" int,
+	CONSTRAINT "book_pkey" PRIMARY key("uuid")
 ) inherits ("star"."base");
 
 comment on column "star"."book"."title" is '书标题';

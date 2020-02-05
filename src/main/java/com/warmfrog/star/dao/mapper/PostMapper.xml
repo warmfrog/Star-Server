@@ -33,7 +33,7 @@
     <result column="tags" jdbcType="OTHER" property="tags" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
     <result column="classifications" jdbcType="OTHER" property="classifications" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
     <result column="type" jdbcType="SMALLINT" property="type" />
-    <result column="references" jdbcType="OTHER" property="references" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
+    <result column="cites" jdbcType="OTHER" property="cites" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -188,25 +188,6 @@
                   and ${criterion.condition}
                   <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-            <foreach collection="criteria.referencesCriteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
                   </foreach>
                 </when>
               </choose>
@@ -373,25 +354,6 @@
                 </when>
               </choose>
             </foreach>
-            <foreach collection="criteria.referencesCriteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
           </trim>
         </if>
       </foreach>
@@ -402,7 +364,7 @@
     authors, file_path, download_url, content_markdown, content_html, release_time, brief, 
     cover_image, images, word_count, reader_count, likes, dislikes, collection_count, 
     download_count, comment_count, released_platforms, referenced_count, score, language, 
-    tags, classifications, type, references
+    tags, classifications, type, cites
   </sql>
   <select id="selectByExample" parameterType="com.warmfrog.star.dao.mapper.entity.PostCriteria" resultMap="BaseResultMap">
     select
@@ -449,8 +411,7 @@
       referenced_count, score, language, 
       tags, 
       classifications, 
-      type, references
-      )
+      type, cites)
     values (#{uuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{keyWords,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
@@ -465,8 +426,7 @@
       #{referencedCount,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{language,jdbcType=VARCHAR}, 
       #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
       #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
-      #{type,jdbcType=SMALLINT}, #{references,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-      )
+      #{type,jdbcType=SMALLINT}, #{cites,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.warmfrog.star.dao.mapper.entity.Post">
     insert into star.post
@@ -564,8 +524,8 @@
       <if test="type != null">
         type,
       </if>
-      <if test="references != null">
-        references,
+      <if test="cites != null">
+        cites,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -662,8 +622,8 @@
       <if test="type != null">
         #{type,jdbcType=SMALLINT},
       </if>
-      <if test="references != null">
-        #{references,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      <if test="cites != null">
+        #{cites,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -769,8 +729,8 @@
       <if test="record.type != null">
         type = #{record.type,jdbcType=SMALLINT},
       </if>
-      <if test="record.references != null">
-        references = #{record.references,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      <if test="record.cites != null">
+        cites = #{record.cites,jdbcType=OTHER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -810,7 +770,7 @@
       tags = #{record.tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       classifications = #{record.classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       type = #{record.type,jdbcType=SMALLINT},
-      references = #{record.references,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+      cites = #{record.cites,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -908,8 +868,8 @@
       <if test="type != null">
         type = #{type,jdbcType=SMALLINT},
       </if>
-      <if test="references != null">
-        references = #{references,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      <if test="cites != null">
+        cites = #{cites,jdbcType=OTHER},
       </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
@@ -946,7 +906,7 @@
       tags = #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       classifications = #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       type = #{type,jdbcType=SMALLINT},
-      references = #{references,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+      cites = #{cites,jdbcType=OTHER}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.warmfrog.star.dao.mapper.entity.PostCriteria" resultMap="BaseResultMap">

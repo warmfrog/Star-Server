@@ -1,5 +1,6 @@
 package com.warmfrog.star.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.warmfrog.star.common.builder.PostBuilder;
 import com.warmfrog.star.common.dto.PostDto;
@@ -26,7 +27,7 @@ public class PostServiceImpl implements PostService {
     PostDao postDao;
 
     public void insert(PostDto postDto) {
-        postDao.getMapper().insertSelective(PostBuilder.buildInsert(postDto));
+        postDao.getMapper().insert(PostBuilder.buildInsert(postDto));
     }
 
     public void update(PostDto postDto) {
@@ -50,7 +51,6 @@ public class PostServiceImpl implements PostService {
         List<Post> posts = postDao.getMapper().selectByExample(example);
 
         List<PostVo> postVoList = getPostVos(posts);
-
         return postVoList;
     }
 
@@ -59,6 +59,14 @@ public class PostServiceImpl implements PostService {
         posts.forEach(post -> {
             PostVo postVo = new PostVo();
             BeanUtils.copyProperties(post, postVo);
+            postVo.setKeyWords(JSON.parseArray(JSON.toJSONString(post.getKeyWords()), String.class));
+            postVo.setAuthor(JSON.parseObject(JSON.toJSONString(post.getAuthor()), PostDto.Author.class));
+            postVo.setAuthors(JSON.parseArray(JSON.toJSONString(post.getAuthors()), PostDto.Author.class));
+            postVo.setImages(JSON.parseArray(JSON.toJSONString(post.getImages()), String.class));
+            postVo.setReleasedPlatforms(JSON.parseArray(JSON.toJSONString(post.getReleasedPlatforms()), PostDto.ReleasedPlatform.class));
+            postVo.setTags(JSON.parseArray(JSON.toJSONString(post.getTags()), String.class));
+            postVo.setClassifications(JSON.parseArray(JSON.toJSONString(post.getClassifications()), String.class));
+            postVo.setCites(JSON.parseArray(JSON.toJSONString(post.getCites()), PostDto.Cite.class));
             postVoList.add(postVo);
         });
         return postVoList;

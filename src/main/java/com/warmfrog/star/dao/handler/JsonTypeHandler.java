@@ -4,6 +4,7 @@
 package com.warmfrog.star.dao.handler;
 
 import com.alibaba.fastjson.JSON;
+import com.warmfrog.star.common.util.JsonUtil;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
@@ -28,16 +29,16 @@ public class JsonTypeHandler extends BaseTypeHandler <Object> {
 
     @Override
     public Object getNullableResult(ResultSet resultSet, String s) throws SQLException {
-        return JSON.parseObject(resultSet.getString(s), Object.class);
+        return JsonUtil.fromJson(resultSet.getString(s), Object.class);
     }
 
     @Override
     public Object getNullableResult(ResultSet resultSet, int i) throws SQLException {
-        return JSON.parseObject(resultSet.getString(i), Object.class);
+        return JsonUtil.fromJson(resultSet.getString(i), Object.class);
     }
 
     @Override
     public Object getNullableResult(CallableStatement callableStatement, int i) throws SQLException {
-        return JSON.parseObject(callableStatement.getString(i), Object.class);
+        return JsonUtil.fromJson(callableStatement.getString(i), Object.class);
     }
 }
