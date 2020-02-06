@@ -10,6 +10,7 @@ import com.warmfrog.star.dao.mapper.entity.SoftwareCriteria;
 import com.warmfrog.star.service.SoftwareService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
  * @author libo
  * @date 2020/2/6
  */
+@Service
 public class SoftwareServiceImpl implements SoftwareService {
     @Autowired
     SoftwareDao softwareDao;
