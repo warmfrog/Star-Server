@@ -3,6 +3,7 @@ package com.warmfrog.star.service.impl;
 import com.github.pagehelper.PageInfo;
 import com.warmfrog.star.common.builder.SiteBuilder;
 import com.warmfrog.star.common.dto.SiteDto;
+import com.warmfrog.star.common.enums.DeleteFlagEnum;
 import com.warmfrog.star.common.vo.SiteVo;
 import com.warmfrog.star.dao.SiteDao;
 import com.warmfrog.star.dao.mapper.entity.Site;
@@ -54,7 +55,7 @@ public class SiteServiceImpl implements SiteService {
     @Override
     public List<SiteVo> list(SiteDto siteDto) {
         SiteCriteria example = new SiteCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Site> sites = siteDao.getMapper().selectByExample(example);
         ArrayList<SiteVo> siteVos = new ArrayList<>();
         sites.forEach(site -> {
@@ -67,7 +68,7 @@ public class SiteServiceImpl implements SiteService {
     @Override
     public PageInfo<SiteVo> listByPage(SiteDto siteDto) {
         SiteCriteria example = new SiteCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Site> sites = siteDao.getMapper().selectByExample(example);
         ArrayList<SiteVo> siteVos = new ArrayList<>();
         sites.forEach(site -> {

@@ -3,6 +3,7 @@ package com.warmfrog.star.service.impl;
 import com.github.pagehelper.PageInfo;
 import com.warmfrog.star.common.builder.MenuBuilder;
 import com.warmfrog.star.common.dto.MenuDto;
+import com.warmfrog.star.common.enums.DeleteFlagEnum;
 import com.warmfrog.star.common.vo.MenuVo;
 import com.warmfrog.star.dao.MenuDao;
 import com.warmfrog.star.dao.mapper.entity.Menu;
@@ -54,7 +55,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<MenuVo> list(MenuDto menuDto) {
         MenuCriteria example = new MenuCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Menu> menus = menuDao.getMapper().selectByExample(example);
         List<MenuVo> menuVos = new ArrayList<>();
         menus.forEach(menu -> {
@@ -68,7 +69,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public PageInfo<MenuVo> listByPage(MenuDto menuDto) {
         MenuCriteria example = new MenuCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Menu> menus = menuDao.getMapper().selectByExample(example);
         List<MenuVo> menuVos = new ArrayList<>();
         menus.forEach(menu -> {

@@ -3,6 +3,7 @@ package com.warmfrog.star.service.impl;
 import com.github.pagehelper.PageInfo;
 import com.warmfrog.star.common.builder.BookBuilder;
 import com.warmfrog.star.common.dto.BookDto;
+import com.warmfrog.star.common.enums.DeleteFlagEnum;
 import com.warmfrog.star.common.vo.BookVo;
 import com.warmfrog.star.dao.BookDao;
 import com.warmfrog.star.dao.mapper.entity.Book;
@@ -51,7 +52,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookVo> list(BookDto bookDto) {
         BookCriteria example = new BookCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Book> books = bookDao.getMapper().selectByExample(example);
         List<BookVo> bookVos = new ArrayList<>();
         books.forEach(book -> {
@@ -65,7 +66,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public PageInfo<BookVo> listByPage(BookDto bookDto) {
         BookCriteria example = new BookCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Book> books = bookDao.getMapper().selectByExample(example);
         List<BookVo> bookVos = new ArrayList<>();
         books.forEach(book -> {

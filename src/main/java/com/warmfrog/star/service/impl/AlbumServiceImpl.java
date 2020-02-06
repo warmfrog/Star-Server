@@ -3,6 +3,7 @@ package com.warmfrog.star.service.impl;
 import com.github.pagehelper.PageInfo;
 import com.warmfrog.star.common.builder.AlbumBuilder;
 import com.warmfrog.star.common.dto.AlbumDto;
+import com.warmfrog.star.common.enums.DeleteFlagEnum;
 import com.warmfrog.star.common.vo.AlbumVo;
 import com.warmfrog.star.dao.AlbumDao;
 import com.warmfrog.star.dao.mapper.entity.Album;
@@ -51,7 +52,7 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public List<AlbumVo> list(AlbumDto albumDto) {
         AlbumCriteria example = new AlbumCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Album> albums = albumDao.getMapper().selectByExample(example);
         List<AlbumVo> albumVos = new ArrayList<>();
         albums.forEach(album -> {
@@ -65,7 +66,7 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public PageInfo<AlbumVo> listByPage(AlbumDto albumDto) {
         AlbumCriteria example = new AlbumCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Album> albums = albumDao.getMapper().selectByExample(example);
         List<AlbumVo> albumVos = new ArrayList<>();
         albums.forEach(album -> {

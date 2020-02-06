@@ -10,7 +10,6 @@ import java.util.List;
  * @date 2020/2/4
  */
 public class PostVo {
-
     private String uuid;
 
     private Date createTime;
@@ -21,13 +20,15 @@ public class PostVo {
 
     private String updateUser;
 
+    private Short deleteFlag;
+
     private String title;
 
-    private List<String> keyWords;
+    private Object keyWords;
 
-    private Author author;
+    private Object author;
 
-    private List<Author> authors;
+    private Object authors;
 
     private String filePath;
 
@@ -43,7 +44,7 @@ public class PostVo {
 
     private String coverImage;
 
-    private List<String> images;
+    private Object images;
 
     private Integer wordCount;
 
@@ -59,7 +60,7 @@ public class PostVo {
 
     private Integer commentCount;
 
-    private List<PostDto.ReleasedPlatform> releasedPlatforms;
+    private Object releasedPlatforms;
 
     private Integer referencedCount;
 
@@ -67,13 +68,13 @@ public class PostVo {
 
     private String language;
 
-    private List<String> tags;
+    private Object tags;
 
-    private List<String> classifications;
+    private Object classifications;
 
     private Short type;
 
-    private List<PostDto.Cite> cites;
+    private Object cites;
 
     public String getUuid() {
         return uuid;
@@ -115,12 +116,44 @@ public class PostVo {
         this.updateUser = updateUser;
     }
 
+    public Short getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Short deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Object getKeyWords() {
+        return keyWords;
+    }
+
+    public void setKeyWords(Object keyWords) {
+        this.keyWords = keyWords;
+    }
+
+    public Object getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Object author) {
+        this.author = author;
+    }
+
+    public Object getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Object authors) {
+        this.authors = authors;
     }
 
     public String getFilePath() {
@@ -179,6 +212,14 @@ public class PostVo {
         this.coverImage = coverImage;
     }
 
+    public Object getImages() {
+        return images;
+    }
+
+    public void setImages(Object images) {
+        this.images = images;
+    }
+
     public Integer getWordCount() {
         return wordCount;
     }
@@ -235,6 +276,14 @@ public class PostVo {
         this.commentCount = commentCount;
     }
 
+    public Object getReleasedPlatforms() {
+        return releasedPlatforms;
+    }
+
+    public void setReleasedPlatforms(Object releasedPlatforms) {
+        this.releasedPlatforms = releasedPlatforms;
+    }
+
     public Integer getReferencedCount() {
         return referencedCount;
     }
@@ -259,6 +308,22 @@ public class PostVo {
         this.language = language;
     }
 
+    public Object getTags() {
+        return tags;
+    }
+
+    public void setTags(Object tags) {
+        this.tags = tags;
+    }
+
+    public Object getClassifications() {
+        return classifications;
+    }
+
+    public void setClassifications(Object classifications) {
+        this.classifications = classifications;
+    }
+
     public Short getType() {
         return type;
     }
@@ -267,67 +332,11 @@ public class PostVo {
         this.type = type;
     }
 
-    public List<String> getKeyWords() {
-        return keyWords;
-    }
-
-    public void setKeyWords(List<String> keyWords) {
-        this.keyWords = keyWords;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public List<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
-
-    public List<String> getImages() {
-        return images;
-    }
-
-    public void setImages(List<String> images) {
-        this.images = images;
-    }
-
-    public List<PostDto.ReleasedPlatform> getReleasedPlatforms() {
-        return releasedPlatforms;
-    }
-
-    public void setReleasedPlatforms(List<PostDto.ReleasedPlatform> releasedPlatforms) {
-        this.releasedPlatforms = releasedPlatforms;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    public List<String> getClassifications() {
-        return classifications;
-    }
-
-    public void setClassifications(List<String> classifications) {
-        this.classifications = classifications;
-    }
-
-    public List<PostDto.Cite> getCites() {
+    public Object getCites() {
         return cites;
     }
 
-    public void setCites(List<PostDto.Cite> cites) {
+    public void setCites(Object cites) {
         this.cites = cites;
     }
 }

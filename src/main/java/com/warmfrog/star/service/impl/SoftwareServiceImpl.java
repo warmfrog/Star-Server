@@ -3,6 +3,7 @@ package com.warmfrog.star.service.impl;
 import com.github.pagehelper.PageInfo;
 import com.warmfrog.star.common.builder.SoftwareBuilder;
 import com.warmfrog.star.common.dto.SoftwareDto;
+import com.warmfrog.star.common.enums.DeleteFlagEnum;
 import com.warmfrog.star.common.vo.SoftwareVo;
 import com.warmfrog.star.dao.SoftwareDao;
 import com.warmfrog.star.dao.mapper.entity.Software;
@@ -54,7 +55,7 @@ public class SoftwareServiceImpl implements SoftwareService {
     @Override
     public List<SoftwareVo> list(SoftwareDto softwareDto) {
         SoftwareCriteria example = new SoftwareCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Software> softwares = softwareDao.getMapper().selectByExample(example);
         List<SoftwareVo> softwareVos = new ArrayList<>();
         softwares.forEach(software -> {
@@ -67,7 +68,7 @@ public class SoftwareServiceImpl implements SoftwareService {
     @Override
     public PageInfo<SoftwareVo> listByPage(SoftwareDto softwareDto) {
         SoftwareCriteria example = new SoftwareCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Software> softwares = softwareDao.getMapper().selectByExample(example);
         List<SoftwareVo> softwareVos = new ArrayList<>();
         softwares.forEach(software -> {

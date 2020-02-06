@@ -3,6 +3,7 @@ package com.warmfrog.star.service.impl;
 import com.github.pagehelper.PageInfo;
 import com.warmfrog.star.common.builder.AppBuilder;
 import com.warmfrog.star.common.dto.AppDto;
+import com.warmfrog.star.common.enums.DeleteFlagEnum;
 import com.warmfrog.star.common.vo.AppVo;
 import com.warmfrog.star.dao.AppDao;
 import com.warmfrog.star.dao.mapper.entity.App;
@@ -50,7 +51,7 @@ public class AppServiceImpl implements AppService {
     @Override
     public List<AppVo> list(AppDto appDto) {
         AppCriteria example = new AppCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<App> apps = appDao.getMapper().selectByExample(example);
         List<AppVo> appVos = new ArrayList<>();
         apps.forEach(app -> {
@@ -64,7 +65,7 @@ public class AppServiceImpl implements AppService {
     @Override
     public PageInfo<AppVo> listByPage(AppDto appDto) {
         AppCriteria example = new AppCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<App> apps = appDao.getMapper().selectByExample(example);
         List<AppVo> appVos = new ArrayList<>();
         apps.forEach(app -> {

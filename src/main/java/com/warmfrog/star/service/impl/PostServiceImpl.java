@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.warmfrog.star.common.builder.PostBuilder;
 import com.warmfrog.star.common.dto.Author;
 import com.warmfrog.star.common.dto.PostDto;
+import com.warmfrog.star.common.enums.DeleteFlagEnum;
 import com.warmfrog.star.common.vo.PostVo;
 import com.warmfrog.star.dao.PostDao;
 import com.warmfrog.star.dao.mapper.entity.Post;
@@ -48,7 +49,7 @@ public class PostServiceImpl implements PostService {
 
     public List<PostVo> list(PostDto postDto) {
         PostCriteria example = new PostCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Post> posts = postDao.getMapper().selectByExample(example);
 
         List<PostVo> postVoList = getPostVos(posts);
@@ -60,14 +61,14 @@ public class PostServiceImpl implements PostService {
         posts.forEach(post -> {
             PostVo postVo = new PostVo();
             BeanUtils.copyProperties(post, postVo);
-            postVo.setKeyWords(JSON.parseArray(JSON.toJSONString(post.getKeyWords()), String.class));
-            postVo.setAuthor(JSON.parseObject(JSON.toJSONString(post.getAuthor()), Author.class));
-            postVo.setAuthors(JSON.parseArray(JSON.toJSONString(post.getAuthors()), Author.class));
-            postVo.setImages(JSON.parseArray(JSON.toJSONString(post.getImages()), String.class));
-            postVo.setReleasedPlatforms(JSON.parseArray(JSON.toJSONString(post.getReleasedPlatforms()), PostDto.ReleasedPlatform.class));
-            postVo.setTags(JSON.parseArray(JSON.toJSONString(post.getTags()), String.class));
-            postVo.setClassifications(JSON.parseArray(JSON.toJSONString(post.getClassifications()), String.class));
-            postVo.setCites(JSON.parseArray(JSON.toJSONString(post.getCites()), PostDto.Cite.class));
+//            postVo.setKeyWords(JSON.parseArray(JSON.toJSONString(post.getKeyWords()), String.class));
+//            postVo.setAuthor(JSON.parseObject(JSON.toJSONString(post.getAuthor()), Author.class));
+//            postVo.setAuthors(JSON.parseArray(JSON.toJSONString(post.getAuthors()), Author.class));
+//            postVo.setImages(JSON.parseArray(JSON.toJSONString(post.getImages()), String.class));
+//            postVo.setReleasedPlatforms(JSON.parseArray(JSON.toJSONString(post.getReleasedPlatforms()), PostDto.ReleasedPlatform.class));
+//            postVo.setTags(JSON.parseArray(JSON.toJSONString(post.getTags()), String.class));
+//            postVo.setClassifications(JSON.parseArray(JSON.toJSONString(post.getClassifications()), String.class));
+//            postVo.setCites(JSON.parseArray(JSON.toJSONString(post.getCites()), PostDto.Cite.class));
             postVoList.add(postVo);
         });
         return postVoList;
@@ -77,7 +78,7 @@ public class PostServiceImpl implements PostService {
         PageInfo<PostVo> postVos = new PageInfo<>();
         RowBounds rowBounds = new RowBounds((postDto.getCurrentPage() - 1) * postDto.getPageSize(), postDto.getPageSize());
         PostCriteria example = new PostCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
 
         long count = postDao.getMapper().countByExample(example);
         List<Post> posts = postDao.getMapper().selectByExampleWithRowbounds(example, rowBounds);

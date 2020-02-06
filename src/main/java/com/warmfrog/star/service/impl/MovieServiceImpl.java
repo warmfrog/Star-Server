@@ -3,6 +3,7 @@ package com.warmfrog.star.service.impl;
 import com.github.pagehelper.PageInfo;
 import com.warmfrog.star.common.builder.MovieBuilder;
 import com.warmfrog.star.common.dto.MovieDto;
+import com.warmfrog.star.common.enums.DeleteFlagEnum;
 import com.warmfrog.star.common.vo.MovieVo;
 import com.warmfrog.star.dao.MovieDao;
 import com.warmfrog.star.dao.mapper.entity.Movie;
@@ -54,7 +55,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<MovieVo> list(MovieDto movieDto) {
         MovieCriteria example = new MovieCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Movie> movies = movieDao.getMapper().selectByExample(example);
         List<MovieVo> movieVos = new ArrayList<>();
         movies.forEach(movie -> {
@@ -67,7 +68,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public PageInfo<MovieVo> listByPage(MovieDto movieDto) {
         MovieCriteria example = new MovieCriteria();
-        example.createCriteria();
+        example.createCriteria().andDeleteFlagEqualTo(DeleteFlagEnum.NODELETE.getValue());
         List<Movie> movies = movieDao.getMapper().selectByExample(example);
         List<MovieVo> movieVos = new ArrayList<>();
         movies.forEach(movie -> {
