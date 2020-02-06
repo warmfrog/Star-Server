@@ -2,6 +2,7 @@ package com.warmfrog.star.common.builder;
 
 import com.warmfrog.star.common.dto.MenuDto;
 import com.warmfrog.star.common.enums.DeleteFlagEnum;
+import com.warmfrog.star.common.util.UUIDUtil;
 import com.warmfrog.star.dao.mapper.entity.Menu;
 import org.springframework.beans.BeanUtils;
 
@@ -30,11 +31,13 @@ public class MenuBuilder implements BaseBuilder<Menu, MenuDto> {
     public Menu buildInsert(MenuDto menuDto) {
         Menu menu = new Menu();
         BeanUtils.copyProperties(menuDto, menu);
+        menu.setUuid(UUIDUtil.getUUID());
         Date now = new Date();
         menu.setCreateTime(now);
         menu.setUpdateTime(now);
         menu.setCreateUser("admin");
         menu.setUpdateUser("admin");
+        menu.setDeleteFlag(DeleteFlagEnum.NODELETE.getValue());
         return menu;
     }
 

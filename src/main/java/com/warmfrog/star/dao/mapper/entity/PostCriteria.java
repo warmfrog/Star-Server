@@ -79,6 +79,8 @@ public class PostCriteria {
 
         protected List<Criterion> classificationsCriteria;
 
+        protected List<Criterion> citesCriteria;
+
         protected List<Criterion> allCriteria;
 
         protected List<Criterion> criteria;
@@ -93,6 +95,7 @@ public class PostCriteria {
             releasedPlatformsCriteria = new ArrayList<Criterion>();
             tagsCriteria = new ArrayList<Criterion>();
             classificationsCriteria = new ArrayList<Criterion>();
+            citesCriteria = new ArrayList<Criterion>();
         }
 
         public List<Criterion> getKeyWordsCriteria() {
@@ -235,15 +238,36 @@ public class PostCriteria {
             allCriteria = null;
         }
 
+        public List<Criterion> getCitesCriteria() {
+            return citesCriteria;
+        }
+
+        protected void addCitesCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            citesCriteria.add(new Criterion(condition, value, "com.warmfrog.star.dao.handler.JsonTypeHandler"));
+            allCriteria = null;
+        }
+
+        protected void addCitesCriterion(String condition, Object value1, Object value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            citesCriteria.add(new Criterion(condition, value1, value2, "com.warmfrog.star.dao.handler.JsonTypeHandler"));
+            allCriteria = null;
+        }
+
         public boolean isValid() {
             return criteria.size() > 0
-                || keyWordsCriteria.size() > 0
-                || authorCriteria.size() > 0
-                || authorsCriteria.size() > 0
-                || imagesCriteria.size() > 0
-                || releasedPlatformsCriteria.size() > 0
-                || tagsCriteria.size() > 0
-                || classificationsCriteria.size() > 0;
+                    || keyWordsCriteria.size() > 0
+                    || authorCriteria.size() > 0
+                    || authorsCriteria.size() > 0
+                    || imagesCriteria.size() > 0
+                    || releasedPlatformsCriteria.size() > 0
+                    || tagsCriteria.size() > 0
+                    || classificationsCriteria.size() > 0
+                    || citesCriteria.size() > 0;
         }
 
         public List<Criterion> getAllCriteria() {
@@ -257,6 +281,7 @@ public class PostCriteria {
                 allCriteria.addAll(releasedPlatformsCriteria);
                 allCriteria.addAll(tagsCriteria);
                 allCriteria.addAll(classificationsCriteria);
+                allCriteria.addAll(citesCriteria);
             }
             return allCriteria;
         }
@@ -2330,52 +2355,52 @@ public class PostCriteria {
         }
 
         public Criteria andCitesEqualTo(Object value) {
-            addCriterion("cites =", value, "cites");
+            addCitesCriterion("cites =", value, "cites");
             return (Criteria) this;
         }
 
         public Criteria andCitesNotEqualTo(Object value) {
-            addCriterion("cites <>", value, "cites");
+            addCitesCriterion("cites <>", value, "cites");
             return (Criteria) this;
         }
 
         public Criteria andCitesGreaterThan(Object value) {
-            addCriterion("cites >", value, "cites");
+            addCitesCriterion("cites >", value, "cites");
             return (Criteria) this;
         }
 
         public Criteria andCitesGreaterThanOrEqualTo(Object value) {
-            addCriterion("cites >=", value, "cites");
+            addCitesCriterion("cites >=", value, "cites");
             return (Criteria) this;
         }
 
         public Criteria andCitesLessThan(Object value) {
-            addCriterion("cites <", value, "cites");
+            addCitesCriterion("cites <", value, "cites");
             return (Criteria) this;
         }
 
         public Criteria andCitesLessThanOrEqualTo(Object value) {
-            addCriterion("cites <=", value, "cites");
+            addCitesCriterion("cites <=", value, "cites");
             return (Criteria) this;
         }
 
         public Criteria andCitesIn(List<Object> values) {
-            addCriterion("cites in", values, "cites");
+            addCitesCriterion("cites in", values, "cites");
             return (Criteria) this;
         }
 
         public Criteria andCitesNotIn(List<Object> values) {
-            addCriterion("cites not in", values, "cites");
+            addCitesCriterion("cites not in", values, "cites");
             return (Criteria) this;
         }
 
         public Criteria andCitesBetween(Object value1, Object value2) {
-            addCriterion("cites between", value1, value2, "cites");
+            addCitesCriterion("cites between", value1, value2, "cites");
             return (Criteria) this;
         }
 
         public Criteria andCitesNotBetween(Object value1, Object value2) {
-            addCriterion("cites not between", value1, value2, "cites");
+            addCitesCriterion("cites not between", value1, value2, "cites");
             return (Criteria) this;
         }
     }

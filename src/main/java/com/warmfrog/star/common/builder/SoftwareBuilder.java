@@ -2,6 +2,7 @@ package com.warmfrog.star.common.builder;
 
 import com.warmfrog.star.common.dto.SoftwareDto;
 import com.warmfrog.star.common.enums.DeleteFlagEnum;
+import com.warmfrog.star.common.util.UUIDUtil;
 import com.warmfrog.star.dao.mapper.entity.Software;
 import org.springframework.beans.BeanUtils;
 
@@ -30,11 +31,13 @@ public class SoftwareBuilder implements BaseBuilder<Software, SoftwareDto> {
     public Software buildInsert(SoftwareDto softwareDto) {
         Software software = new Software();
         BeanUtils.copyProperties(softwareDto, software);
+        software.setUuid(UUIDUtil.getUUID());
         Date now = new Date();
         software.setCreateTime(now);
         software.setUpdateTime(now);
         software.setCreateUser("admin");
         software.setUpdateUser("admin");
+        software.setDeleteFlag(DeleteFlagEnum.NODELETE.getValue());
         return software;
     }
 

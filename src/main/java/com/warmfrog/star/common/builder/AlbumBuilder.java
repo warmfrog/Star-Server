@@ -2,6 +2,7 @@ package com.warmfrog.star.common.builder;
 
 import com.warmfrog.star.common.dto.AlbumDto;
 import com.warmfrog.star.common.enums.DeleteFlagEnum;
+import com.warmfrog.star.common.util.UUIDUtil;
 import com.warmfrog.star.dao.mapper.entity.Album;
 import org.springframework.beans.BeanUtils;
 
@@ -30,11 +31,13 @@ public class AlbumBuilder implements BaseBuilder<Album, AlbumDto> {
     public Album buildInsert(AlbumDto albumDto) {
         Album album = new Album();
         BeanUtils.copyProperties(albumDto, album);
+        album.setUuid(UUIDUtil.getUUID());
         Date now = new Date();
         album.setCreateTime(now);
         album.setUpdateTime(now);
         album.setCreateUser("admin");
         album.setUpdateUser("admin");
+        album.setDeleteFlag(DeleteFlagEnum.NODELETE.getValue());
         return album;
     }
 

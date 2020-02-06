@@ -20,8 +20,6 @@ public class PostVo {
 
     private String updateUser;
 
-    private Short deleteFlag;
-
     private String title;
 
     private Object keyWords;
@@ -114,14 +112,6 @@ public class PostVo {
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
-    }
-
-    public Short getDeleteFlag() {
-        return deleteFlag;
-    }
-
-    public void setDeleteFlag(Short deleteFlag) {
-        this.deleteFlag = deleteFlag;
     }
 
     public String getTitle() {

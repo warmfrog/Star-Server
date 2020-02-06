@@ -2,6 +2,7 @@ package com.warmfrog.star.common.builder;
 
 import com.warmfrog.star.common.dto.BookDto;
 import com.warmfrog.star.common.enums.DeleteFlagEnum;
+import com.warmfrog.star.common.util.UUIDUtil;
 import com.warmfrog.star.dao.mapper.entity.App;
 import com.warmfrog.star.dao.mapper.entity.Book;
 import org.springframework.beans.BeanUtils;
@@ -32,11 +33,13 @@ public class BookBuilder implements BaseBuilder<Book, BookDto> {
     public Book buildInsert(BookDto bookDto) {
         Book book = new Book();
         BeanUtils.copyProperties(bookDto, book);
+        book.setUuid(UUIDUtil.getUUID());
         Date now = new Date();
         book.setCreateTime(now);
         book.setUpdateTime(now);
         book.setCreateUser("admin");
         book.setUpdateUser("admin");
+        book.setDeleteFlag(DeleteFlagEnum.NODELETE.getValue());
         return book;
     }
 

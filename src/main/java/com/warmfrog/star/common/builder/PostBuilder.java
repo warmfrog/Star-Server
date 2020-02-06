@@ -30,20 +30,14 @@ public class PostBuilder implements BaseBuilder<Post, PostDto> {
     @Override
     public Post buildInsert(PostDto postDto) {
         Post post = new Post();
-        BeanUtils.copyProperties(postDto, post, "references");
+        BeanUtils.copyProperties(postDto, post);
         post.setUuid(UUIDUtil.getUUID());
-        post.setKeyWords(postDto.getKeyWords());
-        post.setAuthors(postDto.getAuthors());
-        post.setImages(postDto.getImages());
-        post.setReleasedPlatforms(postDto.getReleasedPlatforms());
-        post.setTags(postDto.getTags());
-        post.setClassifications(postDto.getClassifications());
-        post.setCites(postDto.getCites());
         Date now = new Date();
         post.setCreateTime(now);
         post.setUpdateTime(now);
         post.setCreateUser("admin");
         post.setUpdateUser("admin");
+        post.setDeleteFlag(DeleteFlagEnum.NODELETE.getValue());
         return post;
     }
 

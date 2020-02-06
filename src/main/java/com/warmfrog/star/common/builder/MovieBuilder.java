@@ -2,6 +2,7 @@ package com.warmfrog.star.common.builder;
 
 import com.warmfrog.star.common.dto.MovieDto;
 import com.warmfrog.star.common.enums.DeleteFlagEnum;
+import com.warmfrog.star.common.util.UUIDUtil;
 import com.warmfrog.star.dao.mapper.entity.Menu;
 import com.warmfrog.star.dao.mapper.entity.Movie;
 import org.springframework.beans.BeanUtils;
@@ -31,11 +32,13 @@ public class MovieBuilder implements BaseBuilder<Movie, MovieDto> {
     public Movie buildInsert(MovieDto movieDto) {
         Movie movie = new Movie();
         BeanUtils.copyProperties(movieDto, movie);
+        movie.setUuid(UUIDUtil.getUUID());
         Date now = new Date();
         movie.setCreateTime(now);
         movie.setUpdateTime(now);
         movie.setCreateUser("admin");
         movie.setUpdateUser("admin");
+        movie.setDeleteFlag(DeleteFlagEnum.NODELETE.getValue());
         return movie;
     }
 

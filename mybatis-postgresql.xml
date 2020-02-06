@@ -14,87 +14,87 @@
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
             <property name="suppressDate" value="true"/>
-        </commentGenerator>
-        <jdbcConnection driverClass="org.postgresql.Driver"
-                        connectionURL="jdbc:postgresql://10.211.55.17:5432/star" userId="star"
-                        password="star"/>
-        <javaModelGenerator targetPackage="com.warmfrog.star.dao.mapper.entity"
-                            targetProject="src/main/java"/>
-        <sqlMapGenerator targetPackage="com.warmfrog.star.dao.mapper"
-                         targetProject="src/main/java"/>
-        <javaClientGenerator targetPackage="com.warmfrog.star.dao.mapper"
-                             targetProject="src/main/java" type="XMLMAPPER"/>
-        <table schema="star" tableName="album">
-            <columnOverride column="tags" jdbcType="OTHER"
-                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-            <columnOverride column="classifications" jdbcType="OTHER"
-                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-            <columnOverride column="metadata" jdbcType="OTHER"
-                            typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-        </table>
-        <table schema="star" tableName="app">
-            <columnOverride column="dist_platforms" jdbcType="OTHER"
-                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-            <columnOverride column="tags" jdbcType="OTHER"
-                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="classifications" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="developers" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="screenshots" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-            <columnOverride column="download_links" jdbcType="OTHER"
-                            typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-        </table>
-		<table schema="star" tableName="book">
-			<columnOverride column="cover_images" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="catalog" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="tags" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="classifications" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="version" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="author" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="translators" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="download_links" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="paper_purchase_links" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="ebook_purchase_links" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="douban" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-		</table>
-		<table schema="star" tableName="menu"></table>
-		<table schema="star" tableName="movie">
-			<columnOverride column="tags" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="classifications" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="leading_roles" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="screenwriters" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="madein" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="languages" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="showing_date" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="download_links" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="play_links" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="douban" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="imdb" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-		</table>
+		</commentGenerator>
+		<jdbcConnection driverClass="org.postgresql.Driver"
+						connectionURL="jdbc:postgresql://10.211.55.17:5432/star" userId="star"
+						password="star"/>
+		<javaModelGenerator targetPackage="com.warmfrog.star.dao.mapper.entity"
+							targetProject="src/main/java"/>
+		<sqlMapGenerator targetPackage="com.warmfrog.star.dao.mapper"
+						 targetProject="src/main/java"/>
+		<javaClientGenerator targetPackage="com.warmfrog.star.dao.mapper"
+							 targetProject="src/main/java" type="XMLMAPPER"/>
+		<!--        <table schema="star" tableName="album">-->
+		<!--            <columnOverride column="tags" jdbcType="OTHER"-->
+		<!--                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--            <columnOverride column="classifications" jdbcType="OTHER"-->
+		<!--                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--            <columnOverride column="metadata" jdbcType="OTHER"-->
+		<!--                            typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--        </table>-->
+		<!--        <table schema="star" tableName="app">-->
+		<!--            <columnOverride column="dist_platforms" jdbcType="OTHER"-->
+		<!--                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--            <columnOverride column="tags" jdbcType="OTHER"-->
+		<!--                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="classifications" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="developers" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="screenshots" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--            <columnOverride column="download_links" jdbcType="OTHER"-->
+		<!--                            typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--        </table>-->
+		<!--		<table schema="star" tableName="book">-->
+		<!--			<columnOverride column="cover_images" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="catalog" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="tags" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="classifications" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="version" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--			<columnOverride column="author" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--			<columnOverride column="translators" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--			<columnOverride column="download_links" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--			<columnOverride column="paper_purchase_links" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--			<columnOverride column="ebook_purchase_links" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--			<columnOverride column="douban" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--		</table>-->
+		<!--		<table schema="star" tableName="menu"></table>-->
+		<!--		<table schema="star" tableName="movie">-->
+		<!--			<columnOverride column="tags" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="classifications" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="leading_roles" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="screenwriters" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="madein" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="languages" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="showing_date" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--			<columnOverride column="download_links" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--			<columnOverride column="play_links" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--			<columnOverride column="douban" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--			<columnOverride column="imdb" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--		</table>-->
 		<table schema="star" tableName="post">
 			<columnOverride column="key_words" jdbcType="OTHER"
 							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
@@ -110,32 +110,32 @@
 							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
 			<columnOverride column="released_platforms" jdbcType="OTHER"
 							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="references" jdbcType="OTHER"
+			<columnOverride column="cites" jdbcType="OTHER"
 							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
 		</table>
-		<table schema="star" tableName="site">
-			<columnOverride column="tags" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="classifications" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="screenshots" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-		</table>
-		<table schema="star" tableName="software">
-			<columnOverride column="screenshots" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="tags" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="classifications" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="dist_platforms" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="tutorials" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
-			<columnOverride column="download_links" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-			<columnOverride column="histories" jdbcType="OTHER"
-							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
-		</table>
-    </context>
+		<!--		<table schema="star" tableName="site">-->
+		<!--			<columnOverride column="tags" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="classifications" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="screenshots" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--		</table>-->
+		<!--		<table schema="star" tableName="software">-->
+		<!--			<columnOverride column="screenshots" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="tags" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="classifications" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="dist_platforms" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="tutorials" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+		<!--			<columnOverride column="download_links" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--			<columnOverride column="histories" jdbcType="OTHER"-->
+		<!--							typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+		<!--		</table>-->
+	</context>
 </generatorConfiguration>

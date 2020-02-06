@@ -2,6 +2,7 @@ package com.warmfrog.star.common.builder;
 
 import com.warmfrog.star.common.dto.SiteDto;
 import com.warmfrog.star.common.enums.DeleteFlagEnum;
+import com.warmfrog.star.common.util.UUIDUtil;
 import com.warmfrog.star.dao.mapper.entity.Site;
 import org.springframework.beans.BeanUtils;
 
@@ -30,11 +31,13 @@ public class SiteBuilder implements BaseBuilder<Site, SiteDto> {
     public Site buildInsert(SiteDto siteDto) {
         Site site = new Site();
         BeanUtils.copyProperties(siteDto, site);
+        site.setUuid(UUIDUtil.getUUID());
         Date now = new Date();
         site.setCreateTime(now);
         site.setUpdateTime(now);
         site.setCreateUser("admin");
         site.setUpdateUser("admin");
+        site.setDeleteFlag(DeleteFlagEnum.NODELETE.getValue());
         return site;
     }
 
