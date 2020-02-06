@@ -3,6 +3,7 @@ package com.warmfrog.star.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.warmfrog.star.common.builder.PostBuilder;
+import com.warmfrog.star.common.dto.Author;
 import com.warmfrog.star.common.dto.PostDto;
 import com.warmfrog.star.common.vo.PostVo;
 import com.warmfrog.star.dao.PostDao;
@@ -60,8 +61,8 @@ public class PostServiceImpl implements PostService {
             PostVo postVo = new PostVo();
             BeanUtils.copyProperties(post, postVo);
             postVo.setKeyWords(JSON.parseArray(JSON.toJSONString(post.getKeyWords()), String.class));
-            postVo.setAuthor(JSON.parseObject(JSON.toJSONString(post.getAuthor()), PostDto.Author.class));
-            postVo.setAuthors(JSON.parseArray(JSON.toJSONString(post.getAuthors()), PostDto.Author.class));
+            postVo.setAuthor(JSON.parseObject(JSON.toJSONString(post.getAuthor()), Author.class));
+            postVo.setAuthors(JSON.parseArray(JSON.toJSONString(post.getAuthors()), Author.class));
             postVo.setImages(JSON.parseArray(JSON.toJSONString(post.getImages()), String.class));
             postVo.setReleasedPlatforms(JSON.parseArray(JSON.toJSONString(post.getReleasedPlatforms()), PostDto.ReleasedPlatform.class));
             postVo.setTags(JSON.parseArray(JSON.toJSONString(post.getTags()), String.class));
@@ -82,7 +83,7 @@ public class PostServiceImpl implements PostService {
         List<Post> posts = postDao.getMapper().selectByExampleWithRowbounds(example, rowBounds);
         postVos.setList(getPostVos(posts));
         postVos.setTotal(count);
-        postVos.setPageNum(postDto.getPageSize());
+        postVos.setPageNum(postDto.getCurrentPage());
         postVos.setPageSize(postDto.getPageSize());
         return postVos;
     }

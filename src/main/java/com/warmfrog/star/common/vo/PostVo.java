@@ -1,4 +1,5 @@
 package com.warmfrog.star.common.vo;
+import com.warmfrog.star.common.dto.Author;
 import com.warmfrog.star.common.dto.PostDto;
 
 import java.util.Date;
@@ -24,9 +25,9 @@ public class PostVo {
 
     private List<String> keyWords;
 
-    private PostDto.Author author;
+    private Author author;
 
-    private List<PostDto.Author> authors;
+    private List<Author> authors;
 
     private String filePath;
 
@@ -274,19 +275,19 @@ public class PostVo {
         this.keyWords = keyWords;
     }
 
-    public PostDto.Author getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(PostDto.Author author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
-    public List<PostDto.Author> getAuthors() {
+    public List<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<PostDto.Author> authors) {
+    public void setAuthors(List<Author> authors) {
         this.authors = authors;
     }
 

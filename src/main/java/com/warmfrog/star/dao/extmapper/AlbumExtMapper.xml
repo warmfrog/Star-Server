@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warmfrog.star.dao.extmapper.AlbumExtMapper">
+    <resultMap id="BaseResultMap" type="com.warmfrog.star.dao.mapper.entity.Album">
+        <id column="uuid" jdbcType="VARCHAR" property="uuid"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+        <result column="theme" jdbcType="VARCHAR" property="theme"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail"/>
+        <result column="download_url" jdbcType="VARCHAR" property="downloadUrl"/>
+        <result column="likes" jdbcType="INTEGER" property="likes"/>
+        <result column="collect_count" jdbcType="INTEGER" property="collectCount"/>
+        <result column="download_count" jdbcType="INTEGER" property="downloadCount"/>
+        <result column="comment_count" jdbcType="INTEGER" property="commentCount"/>
+        <result column="browsed_count" jdbcType="INTEGER" property="browsedCount"/>
+        <result column="upload_date" jdbcType="TIMESTAMP" property="uploadDate"/>
+        <result column="shoot_time" jdbcType="TIMESTAMP" property="shootTime"/>
+        <result column="tags" jdbcType="OTHER" property="tags"
+                typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
+        <result column="classifications" jdbcType="OTHER" property="classifications"
+                typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>
+        <result column="photographer" jdbcType="VARCHAR" property="photographer"/>
+        <result column="model" jdbcType="VARCHAR" property="model"/>
+        <result column="position" jdbcType="VARCHAR" property="position"/>
+        <result column="metadata" jdbcType="OTHER" property="metadata"
+                typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>
+    </resultMap>
+</mapper>

@@ -11,9 +11,9 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.warmfrog.star"})
 @MapperScan(basePackages = {"com.warmfrog.star.dao"})
-public class App {
+public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }
 

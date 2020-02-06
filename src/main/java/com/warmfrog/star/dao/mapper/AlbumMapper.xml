@@ -23,7 +23,6 @@
     <result column="photographer" jdbcType="VARCHAR" property="photographer" />
     <result column="model" jdbcType="VARCHAR" property="model" />
     <result column="position" jdbcType="VARCHAR" property="position" />
-    <result column="metadata" jdbcType="OTHER" property="metadata" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -83,25 +82,6 @@
                   and ${criterion.condition}
                   <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-            <foreach collection="criteria.metadataCriteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
                   </foreach>
                 </when>
               </choose>
@@ -173,34 +153,15 @@
                 </when>
               </choose>
             </foreach>
-            <foreach collection="criteria.metadataCriteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler} and #{criterion.secondValue,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
           </trim>
         </if>
       </foreach>
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uuid, create_time, update_time, create_user, update_user, theme, title, thumbnail, 
-    download_url, likes, collect_count, download_count, comment_count, browsed_count, 
-    upload_date, shoot_time, tags, classifications, photographer, model, position, metadata
+      uuid, create_time, update_time, create_user, update_user, theme, title, thumbnail,
+      download_url, likes, collect_count, download_count, comment_count, browsed_count,
+      upload_date, shoot_time, tags, classifications, photographer, model, position
   </sql>
   <select id="selectByExample" parameterType="com.warmfrog.star.dao.mapper.entity.AlbumCriteria" resultMap="BaseResultMap">
     select
@@ -233,25 +194,24 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.warmfrog.star.dao.mapper.entity.Album">
-    insert into star.album (uuid, create_time, update_time, 
-      create_user, update_user, theme, 
-      title, thumbnail, download_url, 
-      likes, collect_count, download_count, 
-      comment_count, browsed_count, upload_date, 
-      shoot_time, tags, 
-      classifications, 
-      photographer, model, position, 
-      metadata
+      insert into star.album (uuid, create_time, update_time,
+      create_user, update_user, theme,
+      title, thumbnail, download_url,
+      likes, collect_count, download_count,
+      comment_count, browsed_count, upload_date,
+      shoot_time, tags,
+      classifications,
+      photographer, model, position
       )
-    values (#{uuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{theme,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, #{downloadUrl,jdbcType=VARCHAR}, 
-      #{likes,jdbcType=INTEGER}, #{collectCount,jdbcType=INTEGER}, #{downloadCount,jdbcType=INTEGER}, 
-      #{commentCount,jdbcType=INTEGER}, #{browsedCount,jdbcType=INTEGER}, #{uploadDate,jdbcType=TIMESTAMP}, 
-      #{shootTime,jdbcType=TIMESTAMP}, #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
-      #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
-      #{photographer,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
-      #{metadata,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
+      values (#{uuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{theme,jdbcType=VARCHAR},
+      #{title,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, #{downloadUrl,jdbcType=VARCHAR},
+      #{likes,jdbcType=INTEGER}, #{collectCount,jdbcType=INTEGER}, #{downloadCount,jdbcType=INTEGER},
+      #{commentCount,jdbcType=INTEGER}, #{browsedCount,jdbcType=INTEGER}, #{uploadDate,jdbcType=TIMESTAMP},
+      #{shootTime,jdbcType=TIMESTAMP},
+      #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      #{photographer,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.warmfrog.star.dao.mapper.entity.Album">
@@ -320,9 +280,6 @@
       <if test="position != null">
         position,
       </if>
-      <if test="metadata != null">
-        metadata,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
@@ -387,9 +344,6 @@
       </if>
       <if test="position != null">
         #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="metadata != null">
-        #{metadata,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
       </if>
     </trim>
   </insert>
@@ -465,9 +419,6 @@
       <if test="record.position != null">
         position = #{record.position,jdbcType=VARCHAR},
       </if>
-      <if test="record.metadata != null">
-        metadata = #{record.metadata,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -492,12 +443,12 @@
       upload_date = #{record.uploadDate,jdbcType=TIMESTAMP},
       shoot_time = #{record.shootTime,jdbcType=TIMESTAMP},
       tags = #{record.tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
-      classifications = #{record.classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      classifications =
+      #{record.classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       photographer = #{record.photographer,jdbcType=VARCHAR},
       model = #{record.model,jdbcType=VARCHAR},
-      position = #{record.position,jdbcType=VARCHAR},
-      metadata = #{record.metadata,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-    <if test="_parameter != null">
+      position = #{record.position,jdbcType=VARCHAR}
+      <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
@@ -564,9 +515,6 @@
       <if test="position != null">
         position = #{position,jdbcType=VARCHAR},
       </if>
-      <if test="metadata != null">
-        metadata = #{metadata,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
-      </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
@@ -591,9 +539,8 @@
       classifications = #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       photographer = #{photographer,jdbcType=VARCHAR},
       model = #{model,jdbcType=VARCHAR},
-      position = #{position,jdbcType=VARCHAR},
-      metadata = #{metadata,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
-    where uuid = #{uuid,jdbcType=VARCHAR}
+      position = #{position,jdbcType=VARCHAR}
+      where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.warmfrog.star.dao.mapper.entity.AlbumCriteria" resultMap="BaseResultMap">
     select

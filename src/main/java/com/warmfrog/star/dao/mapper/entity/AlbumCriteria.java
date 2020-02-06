@@ -69,8 +69,6 @@ public class AlbumCriteria {
 
         protected List<Criterion> classificationsCriteria;
 
-        protected List<Criterion> metadataCriteria;
-
         protected List<Criterion> allCriteria;
 
         protected List<Criterion> criteria;
@@ -80,7 +78,6 @@ public class AlbumCriteria {
             criteria = new ArrayList<Criterion>();
             tagsCriteria = new ArrayList<Criterion>();
             classificationsCriteria = new ArrayList<Criterion>();
-            metadataCriteria = new ArrayList<Criterion>();
         }
 
         public List<Criterion> getTagsCriteria() {
@@ -123,31 +120,10 @@ public class AlbumCriteria {
             allCriteria = null;
         }
 
-        public List<Criterion> getMetadataCriteria() {
-            return metadataCriteria;
-        }
-
-        protected void addMetadataCriterion(String condition, Object value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            metadataCriteria.add(new Criterion(condition, value, "com.warmfrog.star.dao.handler.JsonTypeHandler"));
-            allCriteria = null;
-        }
-
-        protected void addMetadataCriterion(String condition, Object value1, Object value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            metadataCriteria.add(new Criterion(condition, value1, value2, "com.warmfrog.star.dao.handler.JsonTypeHandler"));
-            allCriteria = null;
-        }
-
         public boolean isValid() {
             return criteria.size() > 0
-                || tagsCriteria.size() > 0
-                || classificationsCriteria.size() > 0
-                || metadataCriteria.size() > 0;
+                    || tagsCriteria.size() > 0
+                    || classificationsCriteria.size() > 0;
         }
 
         public List<Criterion> getAllCriteria() {
@@ -156,7 +132,6 @@ public class AlbumCriteria {
                 allCriteria.addAll(criteria);
                 allCriteria.addAll(tagsCriteria);
                 allCriteria.addAll(classificationsCriteria);
-                allCriteria.addAll(metadataCriteria);
             }
             return allCriteria;
         }
@@ -1546,66 +1521,6 @@ public class AlbumCriteria {
 
         public Criteria andPositionNotBetween(String value1, String value2) {
             addCriterion("position not between", value1, value2, "position");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataIsNull() {
-            addCriterion("metadata is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataIsNotNull() {
-            addCriterion("metadata is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataEqualTo(Object value) {
-            addMetadataCriterion("metadata =", value, "metadata");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataNotEqualTo(Object value) {
-            addMetadataCriterion("metadata <>", value, "metadata");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataGreaterThan(Object value) {
-            addMetadataCriterion("metadata >", value, "metadata");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataGreaterThanOrEqualTo(Object value) {
-            addMetadataCriterion("metadata >=", value, "metadata");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataLessThan(Object value) {
-            addMetadataCriterion("metadata <", value, "metadata");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataLessThanOrEqualTo(Object value) {
-            addMetadataCriterion("metadata <=", value, "metadata");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataIn(List<Object> values) {
-            addMetadataCriterion("metadata in", values, "metadata");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataNotIn(List<Object> values) {
-            addMetadataCriterion("metadata not in", values, "metadata");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataBetween(Object value1, Object value2) {
-            addMetadataCriterion("metadata between", value1, value2, "metadata");
-            return (Criteria) this;
-        }
-
-        public Criteria andMetadataNotBetween(Object value1, Object value2) {
-            addMetadataCriterion("metadata not between", value1, value2, "metadata");
             return (Criteria) this;
         }
     }

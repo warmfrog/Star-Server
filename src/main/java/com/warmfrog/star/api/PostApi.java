@@ -1,6 +1,6 @@
 package com.warmfrog.star.api;
 
-
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.warmfrog.star.common.Response;
 import com.warmfrog.star.common.dto.PostDto;
@@ -20,44 +20,62 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/api/post")
+@CrossOrigin
 public class PostApi {
+    private static final Logger logger = LoggerFactory.getLogger(PostApi.class);
+
     @Autowired
     PostService postServiceImpl;
-    private Logger logger = LoggerFactory.getLogger(PostApi.class);
 
-    @PostMapping
+    @PostMapping(value = "/add")
     Response add(@RequestBody @Validated PostDto postDto) {
+        logger.info("PostApi add begin, params: {}", JSON.toJSONString(postDto));
+
         postServiceImpl.insert(postDto);
         return Response.successResponse(null);
     }
 
-    @DeleteMapping
+    @PostMapping("/delete")
     Response delete(@RequestBody @Validated PostDto postDto) {
+        logger.info("PostApi delete begin, params: {}", JSON.toJSONString(postDto));
+
         postServiceImpl.delete(postDto);
         return Response.successResponse(null);
     }
 
-    @PutMapping
+    @PostMapping("/update")
     Response update(@RequestBody @Validated PostDto postDto) {
+        logger.info("PostApi update begin, params: {}", JSON.toJSONString(postDto));
+
         postServiceImpl.update(postDto);
         return Response.successResponse(null);
     }
 
-    @GetMapping
+    @PostMapping("/get")
     Response get(@RequestBody @Validated PostDto postDto) {
+        logger.info("PostApi get begin, params: {}", JSON.toJSONString(postDto));
+
         PostVo postVo = postServiceImpl.get(postDto);
         return Response.successResponse(postVo);
     }
 
-    @GetMapping("/list")
+    @PostMapping("/list")
     Response list(@RequestBody @Validated PostDto postDto) {
+        logger.info("PostApi list begin, params: {}", JSON.toJSONString(postDto));
+
         List<PostVo> list = postServiceImpl.list(postDto);
+
+        logger.info("PostApi list end, result: {}", JSON.toJSONString(list));
         return Response.successResponse(list);
     }
 
-    @GetMapping("/listByPage")
+    @PostMapping("/listByPage")
     Response listByPage(@RequestBody @Validated PostDto postDto) {
+        logger.info("PostApi listByPage begin, params: {}", JSON.toJSONString(postDto));
+
         PageInfo<PostVo> postVoPageInfo = postServiceImpl.listByPage(postDto);
+
+        logger.info("PostApi listByPage end, result: {}", JSON.toJSONString(postVoPageInfo));
         return Response.successResponse(postVoPageInfo);
     }
 

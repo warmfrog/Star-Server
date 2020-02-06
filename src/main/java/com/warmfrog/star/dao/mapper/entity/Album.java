@@ -45,8 +45,6 @@ public class Album {
 
     private String position;
 
-    private Object metadata;
-
     public String getUuid() {
         return uuid;
     }
@@ -215,14 +213,6 @@ public class Album {
         this.position = position;
     }
 
-    public Object getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(Object metadata) {
-        this.metadata = metadata;
-    }
-
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -245,18 +235,17 @@ public class Album {
             && (this.getThumbnail() == null ? other.getThumbnail() == null : this.getThumbnail().equals(other.getThumbnail()))
             && (this.getDownloadUrl() == null ? other.getDownloadUrl() == null : this.getDownloadUrl().equals(other.getDownloadUrl()))
             && (this.getLikes() == null ? other.getLikes() == null : this.getLikes().equals(other.getLikes()))
-            && (this.getCollectCount() == null ? other.getCollectCount() == null : this.getCollectCount().equals(other.getCollectCount()))
-            && (this.getDownloadCount() == null ? other.getDownloadCount() == null : this.getDownloadCount().equals(other.getDownloadCount()))
-            && (this.getCommentCount() == null ? other.getCommentCount() == null : this.getCommentCount().equals(other.getCommentCount()))
-            && (this.getBrowsedCount() == null ? other.getBrowsedCount() == null : this.getBrowsedCount().equals(other.getBrowsedCount()))
-            && (this.getUploadDate() == null ? other.getUploadDate() == null : this.getUploadDate().equals(other.getUploadDate()))
-            && (this.getShootTime() == null ? other.getShootTime() == null : this.getShootTime().equals(other.getShootTime()))
-            && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
-            && (this.getClassifications() == null ? other.getClassifications() == null : this.getClassifications().equals(other.getClassifications()))
-            && (this.getPhotographer() == null ? other.getPhotographer() == null : this.getPhotographer().equals(other.getPhotographer()))
-            && (this.getModel() == null ? other.getModel() == null : this.getModel().equals(other.getModel()))
-            && (this.getPosition() == null ? other.getPosition() == null : this.getPosition().equals(other.getPosition()))
-            && (this.getMetadata() == null ? other.getMetadata() == null : this.getMetadata().equals(other.getMetadata()));
+                && (this.getCollectCount() == null ? other.getCollectCount() == null : this.getCollectCount().equals(other.getCollectCount()))
+                && (this.getDownloadCount() == null ? other.getDownloadCount() == null : this.getDownloadCount().equals(other.getDownloadCount()))
+                && (this.getCommentCount() == null ? other.getCommentCount() == null : this.getCommentCount().equals(other.getCommentCount()))
+                && (this.getBrowsedCount() == null ? other.getBrowsedCount() == null : this.getBrowsedCount().equals(other.getBrowsedCount()))
+                && (this.getUploadDate() == null ? other.getUploadDate() == null : this.getUploadDate().equals(other.getUploadDate()))
+                && (this.getShootTime() == null ? other.getShootTime() == null : this.getShootTime().equals(other.getShootTime()))
+                && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
+                && (this.getClassifications() == null ? other.getClassifications() == null : this.getClassifications().equals(other.getClassifications()))
+                && (this.getPhotographer() == null ? other.getPhotographer() == null : this.getPhotographer().equals(other.getPhotographer()))
+                && (this.getModel() == null ? other.getModel() == null : this.getModel().equals(other.getModel()))
+                && (this.getPosition() == null ? other.getPosition() == null : this.getPosition().equals(other.getPosition()));
     }
 
     @Override
@@ -284,7 +273,6 @@ public class Album {
         result = prime * result + ((getPhotographer() == null) ? 0 : getPhotographer().hashCode());
         result = prime * result + ((getModel() == null) ? 0 : getModel().hashCode());
         result = prime * result + ((getPosition() == null) ? 0 : getPosition().hashCode());
-        result = prime * result + ((getMetadata() == null) ? 0 : getMetadata().hashCode());
         return result;
     }
 
@@ -315,7 +303,6 @@ public class Album {
         sb.append(", photographer=").append(photographer);
         sb.append(", model=").append(model);
         sb.append(", position=").append(position);
-        sb.append(", metadata=").append(metadata);
         sb.append("]");
         return sb.toString();
     }
