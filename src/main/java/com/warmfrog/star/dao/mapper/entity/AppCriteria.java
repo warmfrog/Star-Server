@@ -594,6 +594,66 @@ public class AppCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andDeleteFlagIsNull() {
+            addCriterion("delete_flag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagIsNotNull() {
+            addCriterion("delete_flag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagEqualTo(Short value) {
+            addCriterion("delete_flag =", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagNotEqualTo(Short value) {
+            addCriterion("delete_flag <>", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagGreaterThan(Short value) {
+            addCriterion("delete_flag >", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagGreaterThanOrEqualTo(Short value) {
+            addCriterion("delete_flag >=", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagLessThan(Short value) {
+            addCriterion("delete_flag <", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagLessThanOrEqualTo(Short value) {
+            addCriterion("delete_flag <=", value, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagIn(List<Short> values) {
+            addCriterion("delete_flag in", values, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagNotIn(List<Short> values) {
+            addCriterion("delete_flag not in", values, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagBetween(Short value1, Short value2) {
+            addCriterion("delete_flag between", value1, value2, "deleteFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteFlagNotBetween(Short value1, Short value2) {
+            addCriterion("delete_flag not between", value1, value2, "deleteFlag");
+            return (Criteria) this;
+        }
+
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;
@@ -984,63 +1044,63 @@ public class AppCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andHasadIsNull() {
-            addCriterion("hasAd is null");
+        public Criteria andHasAdIsNull() {
+            addCriterion("has_ad is null");
             return (Criteria) this;
         }
 
-        public Criteria andHasadIsNotNull() {
-            addCriterion("hasAd is not null");
+        public Criteria andHasAdIsNotNull() {
+            addCriterion("has_ad is not null");
             return (Criteria) this;
         }
 
-        public Criteria andHasadEqualTo(Short value) {
-            addCriterion("hasAd =", value, "hasad");
+        public Criteria andHasAdEqualTo(Short value) {
+            addCriterion("has_ad =", value, "hasAd");
             return (Criteria) this;
         }
 
-        public Criteria andHasadNotEqualTo(Short value) {
-            addCriterion("hasAd <>", value, "hasad");
+        public Criteria andHasAdNotEqualTo(Short value) {
+            addCriterion("has_ad <>", value, "hasAd");
             return (Criteria) this;
         }
 
-        public Criteria andHasadGreaterThan(Short value) {
-            addCriterion("hasAd >", value, "hasad");
+        public Criteria andHasAdGreaterThan(Short value) {
+            addCriterion("has_ad >", value, "hasAd");
             return (Criteria) this;
         }
 
-        public Criteria andHasadGreaterThanOrEqualTo(Short value) {
-            addCriterion("hasAd >=", value, "hasad");
+        public Criteria andHasAdGreaterThanOrEqualTo(Short value) {
+            addCriterion("has_ad >=", value, "hasAd");
             return (Criteria) this;
         }
 
-        public Criteria andHasadLessThan(Short value) {
-            addCriterion("hasAd <", value, "hasad");
+        public Criteria andHasAdLessThan(Short value) {
+            addCriterion("has_ad <", value, "hasAd");
             return (Criteria) this;
         }
 
-        public Criteria andHasadLessThanOrEqualTo(Short value) {
-            addCriterion("hasAd <=", value, "hasad");
+        public Criteria andHasAdLessThanOrEqualTo(Short value) {
+            addCriterion("has_ad <=", value, "hasAd");
             return (Criteria) this;
         }
 
-        public Criteria andHasadIn(List<Short> values) {
-            addCriterion("hasAd in", values, "hasad");
+        public Criteria andHasAdIn(List<Short> values) {
+            addCriterion("has_ad in", values, "hasAd");
             return (Criteria) this;
         }
 
-        public Criteria andHasadNotIn(List<Short> values) {
-            addCriterion("hasAd not in", values, "hasad");
+        public Criteria andHasAdNotIn(List<Short> values) {
+            addCriterion("has_ad not in", values, "hasAd");
             return (Criteria) this;
         }
 
-        public Criteria andHasadBetween(Short value1, Short value2) {
-            addCriterion("hasAd between", value1, value2, "hasad");
+        public Criteria andHasAdBetween(Short value1, Short value2) {
+            addCriterion("has_ad between", value1, value2, "hasAd");
             return (Criteria) this;
         }
 
-        public Criteria andHasadNotBetween(Short value1, Short value2) {
-            addCriterion("hasAd not between", value1, value2, "hasad");
+        public Criteria andHasAdNotBetween(Short value1, Short value2) {
+            addCriterion("has_ad not between", value1, value2, "hasAd");
             return (Criteria) this;
         }
 

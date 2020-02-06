@@ -13,6 +13,8 @@ public class Book {
 
     private String updateUser;
 
+    private Short deleteFlag;
+
     private String title;
 
     private String subtitle;
@@ -109,6 +111,14 @@ public class Book {
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
+    }
+
+    public Short getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Short deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 
     public String getTitle() {
@@ -356,20 +366,21 @@ public class Book {
         }
         Book other = (Book) that;
         return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-            && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
-            && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
-            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-            && (this.getSubtitle() == null ? other.getSubtitle() == null : this.getSubtitle().equals(other.getSubtitle()))
-            && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
-            && (this.getIsbn() == null ? other.getIsbn() == null : this.getIsbn().equals(other.getIsbn()))
-            && (this.getAuthor() == null ? other.getAuthor() == null : this.getAuthor().equals(other.getAuthor()))
-            && (this.getTranslators() == null ? other.getTranslators() == null : this.getTranslators().equals(other.getTranslators()))
-            && (this.getProducer() == null ? other.getProducer() == null : this.getProducer().equals(other.getProducer()))
-            && (this.getThumbnail() == null ? other.getThumbnail() == null : this.getThumbnail().equals(other.getThumbnail()))
-            && (this.getCoverImages() == null ? other.getCoverImages() == null : this.getCoverImages().equals(other.getCoverImages()))
-            && (this.getHasPaper() == null ? other.getHasPaper() == null : this.getHasPaper().equals(other.getHasPaper()))
+                && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+                && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
+                && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
+                && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
+                && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
+                && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+                && (this.getSubtitle() == null ? other.getSubtitle() == null : this.getSubtitle().equals(other.getSubtitle()))
+                && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
+                && (this.getIsbn() == null ? other.getIsbn() == null : this.getIsbn().equals(other.getIsbn()))
+                && (this.getAuthor() == null ? other.getAuthor() == null : this.getAuthor().equals(other.getAuthor()))
+                && (this.getTranslators() == null ? other.getTranslators() == null : this.getTranslators().equals(other.getTranslators()))
+                && (this.getProducer() == null ? other.getProducer() == null : this.getProducer().equals(other.getProducer()))
+                && (this.getThumbnail() == null ? other.getThumbnail() == null : this.getThumbnail().equals(other.getThumbnail()))
+                && (this.getCoverImages() == null ? other.getCoverImages() == null : this.getCoverImages().equals(other.getCoverImages()))
+                && (this.getHasPaper() == null ? other.getHasPaper() == null : this.getHasPaper().equals(other.getHasPaper()))
             && (this.getHasEbook() == null ? other.getHasEbook() == null : this.getHasEbook().equals(other.getHasEbook()))
             && (this.getBookDesign() == null ? other.getBookDesign() == null : this.getBookDesign().equals(other.getBookDesign()))
             && (this.getPublisher() == null ? other.getPublisher() == null : this.getPublisher().equals(other.getPublisher()))
@@ -400,6 +411,7 @@ public class Book {
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getUpdateUser() == null) ? 0 : getUpdateUser().hashCode());
+        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
         result = prime * result + ((getSubtitle() == null) ? 0 : getSubtitle().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
@@ -443,6 +455,7 @@ public class Book {
         sb.append(", updateTime=").append(updateTime);
         sb.append(", createUser=").append(createUser);
         sb.append(", updateUser=").append(updateUser);
+        sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", title=").append(title);
         sb.append(", subtitle=").append(subtitle);
         sb.append(", version=").append(version);

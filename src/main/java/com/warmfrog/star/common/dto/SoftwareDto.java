@@ -1,6 +1,7 @@
 package com.warmfrog.star.common.dto;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author libo
@@ -33,11 +34,11 @@ public class SoftwareDto extends PageDto {
 
     private String icon;
 
-    private Object screenshots;
+    private String[] screenshots;
 
-    private Object tags;
+    private String[] tags;
 
-    private Object classifications;
+    private String[] classifications;
 
     private String score;
 
@@ -55,17 +56,33 @@ public class SoftwareDto extends PageDto {
 
     private String git;
 
-    private Object distPlatforms;
+    private String[] distPlatforms;
 
     private String downloadLink;
 
-    private Object downloadLinks;
+    private List<DownloadLink> downloadLinks;
 
-    private Object tutorials;
+    private String[] tutorials;
 
     private String remark;
 
-    private Object histories;
+    private List<SoftwareHistory> histories;
+
+    public String[] getDistPlatforms() {
+        return distPlatforms;
+    }
+
+    public void setDistPlatforms(String[] distPlatforms) {
+        this.distPlatforms = distPlatforms;
+    }
+
+    public List<DownloadLink> getDownloadLinks() {
+        return downloadLinks;
+    }
+
+    public void setDownloadLinks(List<DownloadLink> downloadLinks) {
+        this.downloadLinks = downloadLinks;
+    }
 
     public String getUuid() {
         return uuid;
@@ -171,27 +188,43 @@ public class SoftwareDto extends PageDto {
         this.icon = icon;
     }
 
-    public Object getScreenshots() {
+    public String[] getTutorials() {
+        return tutorials;
+    }
+
+    public void setTutorials(String[] tutorials) {
+        this.tutorials = tutorials;
+    }
+
+    public List<SoftwareHistory> getHistories() {
+        return histories;
+    }
+
+    public void setHistories(List<SoftwareHistory> histories) {
+        this.histories = histories;
+    }
+
+    public String[] getScreenshots() {
         return screenshots;
     }
 
-    public void setScreenshots(Object screenshots) {
+    public void setScreenshots(String[] screenshots) {
         this.screenshots = screenshots;
     }
 
-    public Object getTags() {
+    public String[] getTags() {
         return tags;
     }
 
-    public void setTags(Object tags) {
+    public void setTags(String[] tags) {
         this.tags = tags;
     }
 
-    public Object getClassifications() {
+    public String[] getClassifications() {
         return classifications;
     }
 
-    public void setClassifications(Object classifications) {
+    public void setClassifications(String[] classifications) {
         this.classifications = classifications;
     }
 
@@ -259,36 +292,12 @@ public class SoftwareDto extends PageDto {
         this.git = git;
     }
 
-    public Object getDistPlatforms() {
-        return distPlatforms;
-    }
-
-    public void setDistPlatforms(Object distPlatforms) {
-        this.distPlatforms = distPlatforms;
-    }
-
     public String getDownloadLink() {
         return downloadLink;
     }
 
     public void setDownloadLink(String downloadLink) {
         this.downloadLink = downloadLink;
-    }
-
-    public Object getDownloadLinks() {
-        return downloadLinks;
-    }
-
-    public void setDownloadLinks(Object downloadLinks) {
-        this.downloadLinks = downloadLinks;
-    }
-
-    public Object getTutorials() {
-        return tutorials;
-    }
-
-    public void setTutorials(Object tutorials) {
-        this.tutorials = tutorials;
     }
 
     public String getRemark() {
@@ -299,11 +308,54 @@ public class SoftwareDto extends PageDto {
         this.remark = remark;
     }
 
-    public Object getHistories() {
-        return histories;
+    public static class DownloadLink {
+        private String platform;
+        private String[] downloadUrls;
+
+        public String getPlatform() {
+            return platform;
+        }
+
+        public void setPlatform(String platform) {
+            this.platform = platform;
+        }
+
+        public String[] getDownloadUrls() {
+            return downloadUrls;
+        }
+
+        public void setDownloadUrls(String[] downloadUrls) {
+            this.downloadUrls = downloadUrls;
+        }
     }
 
-    public void setHistories(Object histories) {
-        this.histories = histories;
+    public static class SoftwareHistory {
+        private String version;
+        private Date releaseTime;
+        private String downloadUrl;
+
+        public String getVersion() {
+            return version;
+        }
+
+        public void setVersion(String version) {
+            this.version = version;
+        }
+
+        public Date getReleaseTime() {
+            return releaseTime;
+        }
+
+        public void setReleaseTime(Date releaseTime) {
+            this.releaseTime = releaseTime;
+        }
+
+        public String getDownloadUrl() {
+            return downloadUrl;
+        }
+
+        public void setDownloadUrl(String downloadUrl) {
+            this.downloadUrl = downloadUrl;
+        }
     }
 }

@@ -7,6 +7,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="delete_flag" jdbcType="SMALLINT" property="deleteFlag"/>
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
     <result column="version" jdbcType="OTHER" property="version" typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler" />
@@ -514,11 +515,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uuid, create_time, update_time, create_user, update_user, title, subtitle, version, 
-    isbn, author, translators, producer, thumbnail, cover_images, has_paper, has_ebook, 
-    book_design, publisher, publish_date, pages, price, language, brief, catalog, score, 
-    tags, classifications, download_links, paper_purchase_links, ebook_purchase_links, 
-    douban, read_count, reading_count, want_read_count
+      uuid, create_time, update_time, create_user, update_user, delete_flag, title, subtitle,
+      version, isbn, author, translators, producer, thumbnail, cover_images, has_paper,
+      has_ebook, book_design, publisher, publish_date, pages, price, language, brief, catalog,
+      score, tags, classifications, download_links, paper_purchase_links, ebook_purchase_links,
+      douban, read_count, reading_count, want_read_count
   </sql>
   <select id="selectByExample" parameterType="com.warmfrog.star.dao.mapper.entity.BookCriteria" resultMap="BaseResultMap">
     select
@@ -551,36 +552,38 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.warmfrog.star.dao.mapper.entity.Book">
-    insert into star.book (uuid, create_time, update_time, 
-      create_user, update_user, title, 
-      subtitle, version, 
-      isbn, author, 
-      translators, 
-      producer, thumbnail, cover_images, 
-      has_paper, has_ebook, book_design, 
-      publisher, publish_date, pages, 
-      price, language, brief, 
-      catalog, 
-      score, tags, 
-      classifications, 
-      download_links, 
-      paper_purchase_links, 
-      ebook_purchase_links, 
-      douban, 
+      insert into star.book (uuid, create_time, update_time,
+      create_user, update_user, delete_flag,
+      title, subtitle, version,
+      isbn, author,
+      translators,
+      producer, thumbnail, cover_images,
+      has_paper, has_ebook, book_design,
+      publisher, publish_date, pages,
+      price, language, brief,
+      catalog,
+      score, tags,
+      classifications,
+      download_links,
+      paper_purchase_links,
+      ebook_purchase_links,
+      douban,
       read_count, reading_count, want_read_count
       )
-    values (#{uuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{subtitle,jdbcType=VARCHAR}, #{version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
-      #{isbn,jdbcType=VARCHAR}, #{author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
-      #{translators,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
-      #{producer,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, #{coverImages,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
-      #{hasPaper,jdbcType=SMALLINT}, #{hasEbook,jdbcType=SMALLINT}, #{bookDesign,jdbcType=VARCHAR}, 
-      #{publisher,jdbcType=VARCHAR}, #{publishDate,jdbcType=TIMESTAMP}, #{pages,jdbcType=INTEGER}, 
-      #{price,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, 
-      #{catalog,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
-      #{score,jdbcType=VARCHAR}, #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
-      #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
+      values (#{uuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=SMALLINT},
+      #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR},
+      #{version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      #{isbn,jdbcType=VARCHAR}, #{author,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      #{translators,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+      #{producer,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR},
+      #{coverImages,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      #{hasPaper,jdbcType=SMALLINT}, #{hasEbook,jdbcType=SMALLINT}, #{bookDesign,jdbcType=VARCHAR},
+      #{publisher,jdbcType=VARCHAR}, #{publishDate,jdbcType=TIMESTAMP}, #{pages,jdbcType=INTEGER},
+      #{price,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR},
+      #{catalog,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      #{score,jdbcType=VARCHAR}, #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       #{downloadLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
       #{paperPurchaseLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
       #{ebookPurchaseLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}, 
@@ -595,26 +598,29 @@
         uuid,
       </if>
       <if test="createTime != null">
-        create_time,
+          create_time,
       </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="createUser != null">
-        create_user,
-      </if>
-      <if test="updateUser != null">
-        update_user,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="subtitle != null">
-        subtitle,
-      </if>
-      <if test="version != null">
-        version,
-      </if>
+        <if test="updateTime != null">
+            update_time,
+        </if>
+        <if test="createUser != null">
+            create_user,
+        </if>
+        <if test="updateUser != null">
+            update_user,
+        </if>
+        <if test="deleteFlag != null">
+            delete_flag,
+        </if>
+        <if test="title != null">
+            title,
+        </if>
+        <if test="subtitle != null">
+            subtitle,
+        </if>
+        <if test="version != null">
+            version,
+        </if>
       <if test="isbn != null">
         isbn,
       </if>
@@ -699,26 +705,29 @@
         #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+          #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUser != null">
-        #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null">
-        #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="subtitle != null">
-        #{subtitle,jdbcType=VARCHAR},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
-      </if>
+        <if test="updateTime != null">
+            #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createUser != null">
+            #{createUser,jdbcType=VARCHAR},
+        </if>
+        <if test="updateUser != null">
+            #{updateUser,jdbcType=VARCHAR},
+        </if>
+        <if test="deleteFlag != null">
+            #{deleteFlag,jdbcType=SMALLINT},
+        </if>
+        <if test="title != null">
+            #{title,jdbcType=VARCHAR},
+        </if>
+        <if test="subtitle != null">
+            #{subtitle,jdbcType=VARCHAR},
+        </if>
+        <if test="version != null">
+            #{version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+        </if>
       <if test="isbn != null">
         #{isbn,jdbcType=VARCHAR},
       </if>
@@ -812,26 +821,29 @@
         uuid = #{record.uuid,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+          create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.createUser != null">
-        create_user = #{record.createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.updateUser != null">
-        update_user = #{record.updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.subtitle != null">
-        subtitle = #{record.subtitle,jdbcType=VARCHAR},
-      </if>
-      <if test="record.version != null">
-        version = #{record.version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
-      </if>
+        <if test="record.updateTime != null">
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.createUser != null">
+            create_user = #{record.createUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.updateUser != null">
+            update_user = #{record.updateUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.deleteFlag != null">
+            delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
+        </if>
+        <if test="record.title != null">
+            title = #{record.title,jdbcType=VARCHAR},
+        </if>
+        <if test="record.subtitle != null">
+            subtitle = #{record.subtitle,jdbcType=VARCHAR},
+        </if>
+        <if test="record.version != null">
+            version = #{record.version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+        </if>
       <if test="record.isbn != null">
         isbn = #{record.isbn,jdbcType=VARCHAR},
       </if>
@@ -916,12 +928,13 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update star.book
-    set uuid = #{record.uuid,jdbcType=VARCHAR},
+      update star.book
+      set uuid = #{record.uuid,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       update_user = #{record.updateUser,jdbcType=VARCHAR},
+      delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
       title = #{record.title,jdbcType=VARCHAR},
       subtitle = #{record.subtitle,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
@@ -961,25 +974,28 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUser != null">
-        create_user = #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null">
-        update_user = #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="subtitle != null">
-        subtitle = #{subtitle,jdbcType=VARCHAR},
-      </if>
-      <if test="version != null">
-        version = #{version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
-      </if>
-      <if test="isbn != null">
+        <if test="updateTime != null">
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createUser != null">
+            create_user = #{createUser,jdbcType=VARCHAR},
+        </if>
+        <if test="updateUser != null">
+            update_user = #{updateUser,jdbcType=VARCHAR},
+        </if>
+        <if test="deleteFlag != null">
+            delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+        </if>
+        <if test="title != null">
+            title = #{title,jdbcType=VARCHAR},
+        </if>
+        <if test="subtitle != null">
+            subtitle = #{subtitle,jdbcType=VARCHAR},
+        </if>
+        <if test="version != null">
+            version = #{version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},
+        </if>
+        <if test="isbn != null">
         isbn = #{isbn,jdbcType=VARCHAR},
       </if>
       <if test="author != null">
@@ -1061,11 +1077,12 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.warmfrog.star.dao.mapper.entity.Book">
-    update star.book
-    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update star.book
+      set create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
       update_user = #{updateUser,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=SMALLINT},
       title = #{title,jdbcType=VARCHAR},
       subtitle = #{subtitle,jdbcType=VARCHAR},
       version = #{version,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler},

@@ -13,6 +13,8 @@ public class Software {
 
     private String updateUser;
 
+    private Short deleteFlag;
+
     private String softwareName;
 
     private String version;
@@ -101,6 +103,14 @@ public class Software {
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
+    }
+
+    public Short getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Short deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 
     public String getSoftwareName() {
@@ -316,20 +326,21 @@ public class Software {
         }
         Software other = (Software) that;
         return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-            && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
-            && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
-            && (this.getSoftwareName() == null ? other.getSoftwareName() == null : this.getSoftwareName().equals(other.getSoftwareName()))
-            && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
-            && (this.getDeveloper() == null ? other.getDeveloper() == null : this.getDeveloper().equals(other.getDeveloper()))
-            && (this.getSize() == null ? other.getSize() == null : this.getSize().equals(other.getSize()))
-            && (this.getMd5() == null ? other.getMd5() == null : this.getMd5().equals(other.getMd5()))
-            && (this.getOfficialSite() == null ? other.getOfficialSite() == null : this.getOfficialSite().equals(other.getOfficialSite()))
-            && (this.getIntroduction() == null ? other.getIntroduction() == null : this.getIntroduction().equals(other.getIntroduction()))
-            && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
-            && (this.getScreenshots() == null ? other.getScreenshots() == null : this.getScreenshots().equals(other.getScreenshots()))
-            && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
+                && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+                && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
+                && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
+                && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
+                && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
+                && (this.getSoftwareName() == null ? other.getSoftwareName() == null : this.getSoftwareName().equals(other.getSoftwareName()))
+                && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
+                && (this.getDeveloper() == null ? other.getDeveloper() == null : this.getDeveloper().equals(other.getDeveloper()))
+                && (this.getSize() == null ? other.getSize() == null : this.getSize().equals(other.getSize()))
+                && (this.getMd5() == null ? other.getMd5() == null : this.getMd5().equals(other.getMd5()))
+                && (this.getOfficialSite() == null ? other.getOfficialSite() == null : this.getOfficialSite().equals(other.getOfficialSite()))
+                && (this.getIntroduction() == null ? other.getIntroduction() == null : this.getIntroduction().equals(other.getIntroduction()))
+                && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
+                && (this.getScreenshots() == null ? other.getScreenshots() == null : this.getScreenshots().equals(other.getScreenshots()))
+                && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
             && (this.getClassifications() == null ? other.getClassifications() == null : this.getClassifications().equals(other.getClassifications()))
             && (this.getScore() == null ? other.getScore() == null : this.getScore().equals(other.getScore()))
             && (this.getPlatform() == null ? other.getPlatform() == null : this.getPlatform().equals(other.getPlatform()))
@@ -356,6 +367,7 @@ public class Software {
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getUpdateUser() == null) ? 0 : getUpdateUser().hashCode());
+        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getSoftwareName() == null) ? 0 : getSoftwareName().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getDeveloper() == null) ? 0 : getDeveloper().hashCode());
@@ -395,6 +407,7 @@ public class Software {
         sb.append(", updateTime=").append(updateTime);
         sb.append(", createUser=").append(createUser);
         sb.append(", updateUser=").append(updateUser);
+        sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", softwareName=").append(softwareName);
         sb.append(", version=").append(version);
         sb.append(", developer=").append(developer);

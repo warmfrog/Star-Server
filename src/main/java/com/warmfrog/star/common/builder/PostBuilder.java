@@ -1,9 +1,12 @@
 package com.warmfrog.star.common.builder;
 
 import com.warmfrog.star.common.dto.PostDto;
+import com.warmfrog.star.common.enums.DeleteFlagEnum;
 import com.warmfrog.star.common.util.UUIDUtil;
 import com.warmfrog.star.dao.mapper.entity.Post;
 import org.springframework.beans.BeanUtils;
+
+import java.util.Date;
 
 /**
  * @author libo
@@ -36,6 +39,11 @@ public class PostBuilder implements BaseBuilder<Post, PostDto> {
         post.setTags(postDto.getTags());
         post.setClassifications(postDto.getClassifications());
         post.setCites(postDto.getCites());
+        Date now = new Date();
+        post.setCreateTime(now);
+        post.setUpdateTime(now);
+        post.setCreateUser("admin");
+        post.setUpdateUser("admin");
         return post;
     }
 
@@ -50,6 +58,9 @@ public class PostBuilder implements BaseBuilder<Post, PostDto> {
         post.setTags(postDto.getTags());
         post.setClassifications(postDto.getClassifications());
         post.setCites(postDto.getCites());
+        Date now = new Date();
+        post.setUpdateTime(now);
+        post.setUpdateUser("test");
         return post;
     }
 
@@ -57,6 +68,10 @@ public class PostBuilder implements BaseBuilder<Post, PostDto> {
     public Post buildDelete(PostDto postDto) {
         Post post = new Post();
         post.setUuid(postDto.getUuid());
+        post.setDeleteFlag(DeleteFlagEnum.DELETED.getValue());
+        Date now = new Date();
+        post.setUpdateTime(now);
+        post.setUpdateUser("test");
         return post;
     }
 }

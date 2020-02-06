@@ -30,7 +30,7 @@ public class AppDto extends PageDto {
 
     private Long size;
 
-    private Short hasad;
+    private Short hasAd;
 
     private String brief;
 
@@ -144,12 +144,12 @@ public class AppDto extends PageDto {
         this.size = size;
     }
 
-    public Short getHasad() {
-        return hasad;
+    public Short getHasAd() {
+        return hasAd;
     }
 
-    public void setHasad(Short hasad) {
-        this.hasad = hasad;
+    public void setHasAd(Short hasAd) {
+        this.hasAd = hasAd;
     }
 
     public String getBrief() {

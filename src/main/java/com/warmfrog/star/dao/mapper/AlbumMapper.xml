@@ -7,6 +7,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="delete_flag" jdbcType="SMALLINT" property="deleteFlag"/>
     <result column="theme" jdbcType="VARCHAR" property="theme" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
@@ -159,8 +160,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-      uuid, create_time, update_time, create_user, update_user, theme, title, thumbnail,
-      download_url, likes, collect_count, download_count, comment_count, browsed_count,
+      uuid, create_time, update_time, create_user, update_user, delete_flag, theme, title,
+      thumbnail, download_url, likes, collect_count, download_count, comment_count, browsed_count,
       upload_date, shoot_time, tags, classifications, photographer, model, position
   </sql>
   <select id="selectByExample" parameterType="com.warmfrog.star.dao.mapper.entity.AlbumCriteria" resultMap="BaseResultMap">
@@ -195,20 +196,20 @@
   </delete>
   <insert id="insert" parameterType="com.warmfrog.star.dao.mapper.entity.Album">
       insert into star.album (uuid, create_time, update_time,
-      create_user, update_user, theme,
-      title, thumbnail, download_url,
-      likes, collect_count, download_count,
-      comment_count, browsed_count, upload_date,
-      shoot_time, tags,
+      create_user, update_user, delete_flag,
+      theme, title, thumbnail,
+      download_url, likes, collect_count,
+      download_count, comment_count, browsed_count,
+      upload_date, shoot_time, tags,
       classifications,
       photographer, model, position
       )
       values (#{uuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
-      #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{theme,jdbcType=VARCHAR},
-      #{title,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, #{downloadUrl,jdbcType=VARCHAR},
-      #{likes,jdbcType=INTEGER}, #{collectCount,jdbcType=INTEGER}, #{downloadCount,jdbcType=INTEGER},
-      #{commentCount,jdbcType=INTEGER}, #{browsedCount,jdbcType=INTEGER}, #{uploadDate,jdbcType=TIMESTAMP},
-      #{shootTime,jdbcType=TIMESTAMP},
+      #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=SMALLINT},
+      #{theme,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR},
+      #{downloadUrl,jdbcType=VARCHAR}, #{likes,jdbcType=INTEGER}, #{collectCount,jdbcType=INTEGER},
+      #{downloadCount,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, #{browsedCount,jdbcType=INTEGER},
+      #{uploadDate,jdbcType=TIMESTAMP}, #{shootTime,jdbcType=TIMESTAMP},
       #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       #{photographer,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}
@@ -221,26 +222,29 @@
         uuid,
       </if>
       <if test="createTime != null">
-        create_time,
+          create_time,
       </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="createUser != null">
-        create_user,
-      </if>
-      <if test="updateUser != null">
-        update_user,
-      </if>
-      <if test="theme != null">
-        theme,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="thumbnail != null">
-        thumbnail,
-      </if>
+        <if test="updateTime != null">
+            update_time,
+        </if>
+        <if test="createUser != null">
+            create_user,
+        </if>
+        <if test="updateUser != null">
+            update_user,
+        </if>
+        <if test="deleteFlag != null">
+            delete_flag,
+        </if>
+        <if test="theme != null">
+            theme,
+        </if>
+        <if test="title != null">
+            title,
+        </if>
+        <if test="thumbnail != null">
+            thumbnail,
+        </if>
       <if test="downloadUrl != null">
         download_url,
       </if>
@@ -288,25 +292,28 @@
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUser != null">
-        #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null">
-        #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="theme != null">
-        #{theme,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="thumbnail != null">
-        #{thumbnail,jdbcType=VARCHAR},
-      </if>
-      <if test="downloadUrl != null">
+        <if test="updateTime != null">
+            #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createUser != null">
+            #{createUser,jdbcType=VARCHAR},
+        </if>
+        <if test="updateUser != null">
+            #{updateUser,jdbcType=VARCHAR},
+        </if>
+        <if test="deleteFlag != null">
+            #{deleteFlag,jdbcType=SMALLINT},
+        </if>
+        <if test="theme != null">
+            #{theme,jdbcType=VARCHAR},
+        </if>
+        <if test="title != null">
+            #{title,jdbcType=VARCHAR},
+        </if>
+        <if test="thumbnail != null">
+            #{thumbnail,jdbcType=VARCHAR},
+        </if>
+        <if test="downloadUrl != null">
         #{downloadUrl,jdbcType=VARCHAR},
       </if>
       <if test="likes != null">
@@ -362,25 +369,28 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.createUser != null">
-        create_user = #{record.createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.updateUser != null">
-        update_user = #{record.updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.theme != null">
-        theme = #{record.theme,jdbcType=VARCHAR},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.thumbnail != null">
-        thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
-      </if>
-      <if test="record.downloadUrl != null">
+        <if test="record.updateTime != null">
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.createUser != null">
+            create_user = #{record.createUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.updateUser != null">
+            update_user = #{record.updateUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.deleteFlag != null">
+            delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
+        </if>
+        <if test="record.theme != null">
+            theme = #{record.theme,jdbcType=VARCHAR},
+        </if>
+        <if test="record.title != null">
+            title = #{record.title,jdbcType=VARCHAR},
+        </if>
+        <if test="record.thumbnail != null">
+            thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
+        </if>
+        <if test="record.downloadUrl != null">
         download_url = #{record.downloadUrl,jdbcType=VARCHAR},
       </if>
       <if test="record.likes != null">
@@ -425,12 +435,13 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update star.album
-    set uuid = #{record.uuid,jdbcType=VARCHAR},
+      update star.album
+      set uuid = #{record.uuid,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       update_user = #{record.updateUser,jdbcType=VARCHAR},
+      delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
       theme = #{record.theme,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR},
       thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
@@ -449,8 +460,8 @@
       model = #{record.model,jdbcType=VARCHAR},
       position = #{record.position,jdbcType=VARCHAR}
       <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
+          <include refid="Update_By_Example_Where_Clause"/>
+      </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.warmfrog.star.dao.mapper.entity.Album">
     update star.album
@@ -458,25 +469,28 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUser != null">
-        create_user = #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null">
-        update_user = #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="theme != null">
-        theme = #{theme,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="thumbnail != null">
-        thumbnail = #{thumbnail,jdbcType=VARCHAR},
-      </if>
-      <if test="downloadUrl != null">
+        <if test="updateTime != null">
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createUser != null">
+            create_user = #{createUser,jdbcType=VARCHAR},
+        </if>
+        <if test="updateUser != null">
+            update_user = #{updateUser,jdbcType=VARCHAR},
+        </if>
+        <if test="deleteFlag != null">
+            delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+        </if>
+        <if test="theme != null">
+            theme = #{theme,jdbcType=VARCHAR},
+        </if>
+        <if test="title != null">
+            title = #{title,jdbcType=VARCHAR},
+        </if>
+        <if test="thumbnail != null">
+            thumbnail = #{thumbnail,jdbcType=VARCHAR},
+        </if>
+        <if test="downloadUrl != null">
         download_url = #{downloadUrl,jdbcType=VARCHAR},
       </if>
       <if test="likes != null">
@@ -519,11 +533,12 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.warmfrog.star.dao.mapper.entity.Album">
-    update star.album
-    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update star.album
+      set create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
       update_user = #{updateUser,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=SMALLINT},
       theme = #{theme,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       thumbnail = #{thumbnail,jdbcType=VARCHAR},

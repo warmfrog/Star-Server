@@ -13,6 +13,8 @@ public class Movie {
 
     private String updateUser;
 
+    private Short deleteFlag;
+
     private String name;
 
     private Integer year;
@@ -93,6 +95,14 @@ public class Movie {
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
+    }
+
+    public Short getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Short deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 
     public String getName() {
@@ -276,20 +286,21 @@ public class Movie {
         }
         Movie other = (Movie) that;
         return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-            && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
-            && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getYear() == null ? other.getYear() == null : this.getYear().equals(other.getYear()))
-            && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
-            && (this.getScreenshots() == null ? other.getScreenshots() == null : this.getScreenshots().equals(other.getScreenshots()))
-            && (this.getCover() == null ? other.getCover() == null : this.getCover().equals(other.getCover()))
-            && (this.getClassifications() == null ? other.getClassifications() == null : this.getClassifications().equals(other.getClassifications()))
-            && (this.getDirector() == null ? other.getDirector() == null : this.getDirector().equals(other.getDirector()))
-            && (this.getLeadingRoles() == null ? other.getLeadingRoles() == null : this.getLeadingRoles().equals(other.getLeadingRoles()))
-            && (this.getScreenwriters() == null ? other.getScreenwriters() == null : this.getScreenwriters().equals(other.getScreenwriters()))
-            && (this.getMadein() == null ? other.getMadein() == null : this.getMadein().equals(other.getMadein()))
+                && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+                && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
+                && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
+                && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
+                && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getYear() == null ? other.getYear() == null : this.getYear().equals(other.getYear()))
+                && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
+                && (this.getScreenshots() == null ? other.getScreenshots() == null : this.getScreenshots().equals(other.getScreenshots()))
+                && (this.getCover() == null ? other.getCover() == null : this.getCover().equals(other.getCover()))
+                && (this.getClassifications() == null ? other.getClassifications() == null : this.getClassifications().equals(other.getClassifications()))
+                && (this.getDirector() == null ? other.getDirector() == null : this.getDirector().equals(other.getDirector()))
+                && (this.getLeadingRoles() == null ? other.getLeadingRoles() == null : this.getLeadingRoles().equals(other.getLeadingRoles()))
+                && (this.getScreenwriters() == null ? other.getScreenwriters() == null : this.getScreenwriters().equals(other.getScreenwriters()))
+                && (this.getMadein() == null ? other.getMadein() == null : this.getMadein().equals(other.getMadein()))
             && (this.getShowingDate() == null ? other.getShowingDate() == null : this.getShowingDate().equals(other.getShowingDate()))
             && (this.getLanguages() == null ? other.getLanguages() == null : this.getLanguages().equals(other.getLanguages()))
             && (this.getScore() == null ? other.getScore() == null : this.getScore().equals(other.getScore()))
@@ -312,6 +323,7 @@ public class Movie {
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getUpdateUser() == null) ? 0 : getUpdateUser().hashCode());
+        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getYear() == null) ? 0 : getYear().hashCode());
         result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());
@@ -347,6 +359,7 @@ public class Movie {
         sb.append(", updateTime=").append(updateTime);
         sb.append(", createUser=").append(createUser);
         sb.append(", updateUser=").append(updateUser);
+        sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", name=").append(name);
         sb.append(", year=").append(year);
         sb.append(", tags=").append(tags);

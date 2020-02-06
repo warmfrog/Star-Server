@@ -1,8 +1,12 @@
 package com.warmfrog.star.common.builder;
 
 import com.warmfrog.star.common.dto.AppDto;
+import com.warmfrog.star.common.enums.DeleteFlagEnum;
+import com.warmfrog.star.dao.mapper.entity.Album;
 import com.warmfrog.star.dao.mapper.entity.App;
 import org.springframework.beans.BeanUtils;
+
+import java.util.Date;
 
 /**
  * @author libo
@@ -27,6 +31,11 @@ public class AppBuilder implements BaseBuilder<App, AppDto> {
     public App buildInsert(AppDto appDto) {
         App app = new App();
         BeanUtils.copyProperties(appDto, app);
+        Date now = new Date();
+        app.setCreateTime(now);
+        app.setUpdateTime(now);
+        app.setCreateUser("admin");
+        app.setUpdateUser("admin");
         return app;
     }
 
@@ -34,6 +43,9 @@ public class AppBuilder implements BaseBuilder<App, AppDto> {
     public App buildUpdate(AppDto appDto) {
         App app = new App();
         BeanUtils.copyProperties(appDto, app);
+        Date now = new Date();
+        app.setUpdateTime(now);
+        app.setUpdateUser("test");
         return app;
     }
 
@@ -41,6 +53,10 @@ public class AppBuilder implements BaseBuilder<App, AppDto> {
     public App buildDelete(AppDto appDto) {
         App app = new App();
         app.setUuid(appDto.getUuid());
+        app.setDeleteFlag(DeleteFlagEnum.DELETED.getValue());
+        Date now = new Date();
+        app.setUpdateTime(now);
+        app.setUpdateUser("test");
         return app;
     }
 }

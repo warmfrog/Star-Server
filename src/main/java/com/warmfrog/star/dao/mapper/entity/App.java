@@ -13,6 +13,8 @@ public class App {
 
     private String updateUser;
 
+    private Short deleteFlag;
+
     private String name;
 
     private Date updateDate;
@@ -25,7 +27,7 @@ public class App {
 
     private Long size;
 
-    private Short hasad;
+    private Short hasAd;
 
     private String brief;
 
@@ -91,6 +93,14 @@ public class App {
         this.updateUser = updateUser;
     }
 
+    public Short getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Short deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
+
     public String getName() {
         return name;
     }
@@ -139,12 +149,12 @@ public class App {
         this.size = size;
     }
 
-    public Short getHasad() {
-        return hasad;
+    public Short getHasAd() {
+        return hasAd;
     }
 
-    public void setHasad(Short hasad) {
-        this.hasad = hasad;
+    public void setHasAd(Short hasAd) {
+        this.hasAd = hasAd;
     }
 
     public String getBrief() {
@@ -256,27 +266,28 @@ public class App {
         }
         App other = (App) that;
         return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-            && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
-            && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getUpdateDate() == null ? other.getUpdateDate() == null : this.getUpdateDate().equals(other.getUpdateDate()))
-            && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
-            && (this.getPlatform() == null ? other.getPlatform() == null : this.getPlatform().equals(other.getPlatform()))
-            && (this.getDistPlatforms() == null ? other.getDistPlatforms() == null : this.getDistPlatforms().equals(other.getDistPlatforms()))
-            && (this.getSize() == null ? other.getSize() == null : this.getSize().equals(other.getSize()))
-            && (this.getHasad() == null ? other.getHasad() == null : this.getHasad().equals(other.getHasad()))
-            && (this.getBrief() == null ? other.getBrief() == null : this.getBrief().equals(other.getBrief()))
-            && (this.getScore() == null ? other.getScore() == null : this.getScore().equals(other.getScore()))
-            && (this.getClassifications() == null ? other.getClassifications() == null : this.getClassifications().equals(other.getClassifications()))
-            && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
-            && (this.getDeveloper() == null ? other.getDeveloper() == null : this.getDeveloper().equals(other.getDeveloper()))
-            && (this.getDevelopers() == null ? other.getDevelopers() == null : this.getDevelopers().equals(other.getDevelopers()))
-            && (this.getFreeCharge() == null ? other.getFreeCharge() == null : this.getFreeCharge().equals(other.getFreeCharge()))
-            && (this.getOpenSource() == null ? other.getOpenSource() == null : this.getOpenSource().equals(other.getOpenSource()))
-            && (this.getGit() == null ? other.getGit() == null : this.getGit().equals(other.getGit()))
-            && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
+                && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+                && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
+                && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
+                && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
+                && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getUpdateDate() == null ? other.getUpdateDate() == null : this.getUpdateDate().equals(other.getUpdateDate()))
+                && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
+                && (this.getPlatform() == null ? other.getPlatform() == null : this.getPlatform().equals(other.getPlatform()))
+                && (this.getDistPlatforms() == null ? other.getDistPlatforms() == null : this.getDistPlatforms().equals(other.getDistPlatforms()))
+                && (this.getSize() == null ? other.getSize() == null : this.getSize().equals(other.getSize()))
+                && (this.getHasAd() == null ? other.getHasAd() == null : this.getHasAd().equals(other.getHasAd()))
+                && (this.getBrief() == null ? other.getBrief() == null : this.getBrief().equals(other.getBrief()))
+                && (this.getScore() == null ? other.getScore() == null : this.getScore().equals(other.getScore()))
+                && (this.getClassifications() == null ? other.getClassifications() == null : this.getClassifications().equals(other.getClassifications()))
+                && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
+                && (this.getDeveloper() == null ? other.getDeveloper() == null : this.getDeveloper().equals(other.getDeveloper()))
+                && (this.getDevelopers() == null ? other.getDevelopers() == null : this.getDevelopers().equals(other.getDevelopers()))
+                && (this.getFreeCharge() == null ? other.getFreeCharge() == null : this.getFreeCharge().equals(other.getFreeCharge()))
+                && (this.getOpenSource() == null ? other.getOpenSource() == null : this.getOpenSource().equals(other.getOpenSource()))
+                && (this.getGit() == null ? other.getGit() == null : this.getGit().equals(other.getGit()))
+                && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
             && (this.getScreenshots() == null ? other.getScreenshots() == null : this.getScreenshots().equals(other.getScreenshots()))
             && (this.getDownloadLinks() == null ? other.getDownloadLinks() == null : this.getDownloadLinks().equals(other.getDownloadLinks()));
     }
@@ -290,13 +301,14 @@ public class App {
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getUpdateUser() == null) ? 0 : getUpdateUser().hashCode());
+        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getUpdateDate() == null) ? 0 : getUpdateDate().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getPlatform() == null) ? 0 : getPlatform().hashCode());
         result = prime * result + ((getDistPlatforms() == null) ? 0 : getDistPlatforms().hashCode());
         result = prime * result + ((getSize() == null) ? 0 : getSize().hashCode());
-        result = prime * result + ((getHasad() == null) ? 0 : getHasad().hashCode());
+        result = prime * result + ((getHasAd() == null) ? 0 : getHasAd().hashCode());
         result = prime * result + ((getBrief() == null) ? 0 : getBrief().hashCode());
         result = prime * result + ((getScore() == null) ? 0 : getScore().hashCode());
         result = prime * result + ((getClassifications() == null) ? 0 : getClassifications().hashCode());
@@ -323,13 +335,14 @@ public class App {
         sb.append(", updateTime=").append(updateTime);
         sb.append(", createUser=").append(createUser);
         sb.append(", updateUser=").append(updateUser);
+        sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", name=").append(name);
         sb.append(", updateDate=").append(updateDate);
         sb.append(", version=").append(version);
         sb.append(", platform=").append(platform);
         sb.append(", distPlatforms=").append(distPlatforms);
         sb.append(", size=").append(size);
-        sb.append(", hasad=").append(hasad);
+        sb.append(", hasAd=").append(hasAd);
         sb.append(", brief=").append(brief);
         sb.append(", score=").append(score);
         sb.append(", classifications=").append(classifications);

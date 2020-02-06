@@ -1,9 +1,12 @@
 package com.warmfrog.star.common.builder;
 
 import com.warmfrog.star.common.dto.MovieDto;
+import com.warmfrog.star.common.enums.DeleteFlagEnum;
 import com.warmfrog.star.dao.mapper.entity.Menu;
 import com.warmfrog.star.dao.mapper.entity.Movie;
 import org.springframework.beans.BeanUtils;
+
+import java.util.Date;
 
 /**
  * @author libo
@@ -28,6 +31,11 @@ public class MovieBuilder implements BaseBuilder<Movie, MovieDto> {
     public Movie buildInsert(MovieDto movieDto) {
         Movie movie = new Movie();
         BeanUtils.copyProperties(movieDto, movie);
+        Date now = new Date();
+        movie.setCreateTime(now);
+        movie.setUpdateTime(now);
+        movie.setCreateUser("admin");
+        movie.setUpdateUser("admin");
         return movie;
     }
 
@@ -35,13 +43,20 @@ public class MovieBuilder implements BaseBuilder<Movie, MovieDto> {
     public Movie buildUpdate(MovieDto movieDto) {
         Movie movie = new Movie();
         BeanUtils.copyProperties(movieDto, movie);
+        Date now = new Date();
+        movie.setUpdateTime(now);
+        movie.setUpdateUser("test");
         return movie;
     }
 
     @Override
     public Movie buildDelete(MovieDto movieDto) {
         Movie movie = new Movie();
-        BeanUtils.copyProperties(movieDto, movie);
+        movie.setUuid(movieDto.getUuid());
+        movie.setDeleteFlag(DeleteFlagEnum.DELETED.getValue());
+        Date now = new Date();
+        movie.setUpdateTime(now);
+        movie.setUpdateUser("test");
         return movie;
     }
 }

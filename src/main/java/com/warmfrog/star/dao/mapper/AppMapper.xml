@@ -7,13 +7,14 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="delete_flag" jdbcType="SMALLINT" property="deleteFlag"/>
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="version" jdbcType="VARCHAR" property="version" />
     <result column="platform" jdbcType="VARCHAR" property="platform" />
     <result column="dist_platforms" jdbcType="OTHER" property="distPlatforms" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
     <result column="size" jdbcType="BIGINT" property="size" />
-    <result column="hasAd" jdbcType="SMALLINT" property="hasad" />
+      <result column="has_ad" jdbcType="SMALLINT" property="hasAd"/>
     <result column="brief" jdbcType="VARCHAR" property="brief" />
     <result column="score" jdbcType="SMALLINT" property="score" />
     <result column="classifications" jdbcType="OTHER" property="classifications" typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler" />
@@ -314,9 +315,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uuid, create_time, update_time, create_user, update_user, name, update_date, version, 
-    platform, dist_platforms, size, hasAd, brief, score, classifications, tags, developer, 
-    developers, free_charge, open_source, git, icon, screenshots, download_links
+      uuid, create_time, update_time, create_user, update_user, delete_flag, name, update_date,
+      version, platform, dist_platforms, size, has_ad, brief, score, classifications, tags,
+      developer, developers, free_charge, open_source, git, icon, screenshots, download_links
   </sql>
   <select id="selectByExample" parameterType="com.warmfrog.star.dao.mapper.entity.AppCriteria" resultMap="BaseResultMap">
     select
@@ -349,28 +350,32 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.warmfrog.star.dao.mapper.entity.App">
-    insert into star.app (uuid, create_time, update_time, 
-      create_user, update_user, name, 
-      update_date, version, platform, 
-      dist_platforms, 
-      size, hasAd, brief, 
-      score, classifications, 
-      tags, 
-      developer, developers, 
-      free_charge, open_source, git, 
-      icon, screenshots, 
+      insert into star.app (uuid, create_time, update_time,
+      create_user, update_user, delete_flag,
+      name, update_date, version,
+      platform, dist_platforms,
+      size, has_ad, brief,
+      score, classifications,
+      tags,
+      developer, developers,
+      free_charge, open_source, git,
+      icon, screenshots,
       download_links
       )
-    values (#{uuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{updateDate,jdbcType=TIMESTAMP}, #{version,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, 
-      #{distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
-      #{size,jdbcType=BIGINT}, #{hasad,jdbcType=SMALLINT}, #{brief,jdbcType=VARCHAR}, 
-      #{score,jdbcType=SMALLINT}, #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
-      #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
-      #{developer,jdbcType=VARCHAR}, #{developers,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
-      #{freeCharge,jdbcType=SMALLINT}, #{openSource,jdbcType=SMALLINT}, #{git,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{screenshots,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler}, 
+      values (#{uuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=SMALLINT},
+      #{name,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{version,jdbcType=VARCHAR},
+      #{platform,jdbcType=VARCHAR},
+      #{distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      #{size,jdbcType=BIGINT}, #{hasAd,jdbcType=SMALLINT}, #{brief,jdbcType=VARCHAR},
+      #{score,jdbcType=SMALLINT},
+      #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      #{developer,jdbcType=VARCHAR},
+      #{developers,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      #{freeCharge,jdbcType=SMALLINT}, #{openSource,jdbcType=SMALLINT}, #{git,jdbcType=VARCHAR},
+      #{icon,jdbcType=VARCHAR},
+      #{screenshots,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       #{downloadLinks,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.JsonTypeHandler}
       )
   </insert>
@@ -381,47 +386,50 @@
         uuid,
       </if>
       <if test="createTime != null">
-        create_time,
+          create_time,
       </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="createUser != null">
-        create_user,
-      </if>
-      <if test="updateUser != null">
-        update_user,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="updateDate != null">
-        update_date,
-      </if>
-      <if test="version != null">
-        version,
-      </if>
-      <if test="platform != null">
-        platform,
-      </if>
-      <if test="distPlatforms != null">
-        dist_platforms,
-      </if>
-      <if test="size != null">
-        size,
-      </if>
-      <if test="hasad != null">
-        hasAd,
-      </if>
-      <if test="brief != null">
-        brief,
-      </if>
-      <if test="score != null">
-        score,
-      </if>
-      <if test="classifications != null">
-        classifications,
-      </if>
+        <if test="updateTime != null">
+            update_time,
+        </if>
+        <if test="createUser != null">
+            create_user,
+        </if>
+        <if test="updateUser != null">
+            update_user,
+        </if>
+        <if test="deleteFlag != null">
+            delete_flag,
+        </if>
+        <if test="name != null">
+            name,
+        </if>
+        <if test="updateDate != null">
+            update_date,
+        </if>
+        <if test="version != null">
+            version,
+        </if>
+        <if test="platform != null">
+            platform,
+        </if>
+        <if test="distPlatforms != null">
+            dist_platforms,
+        </if>
+        <if test="size != null">
+            size,
+        </if>
+        <if test="hasAd != null">
+            has_ad,
+        </if>
+        <if test="brief != null">
+            brief,
+        </if>
+        <if test="score != null">
+            score,
+        </if>
+        <if test="classifications != null">
+            classifications,
+        </if>
       <if test="tags != null">
         tags,
       </if>
@@ -455,47 +463,50 @@
         #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+          #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUser != null">
-        #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null">
-        #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
-        #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=VARCHAR},
-      </if>
-      <if test="platform != null">
-        #{platform,jdbcType=VARCHAR},
-      </if>
-      <if test="distPlatforms != null">
-        #{distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
-      </if>
-      <if test="size != null">
-        #{size,jdbcType=BIGINT},
-      </if>
-      <if test="hasad != null">
-        #{hasad,jdbcType=SMALLINT},
-      </if>
-      <if test="brief != null">
-        #{brief,jdbcType=VARCHAR},
-      </if>
-      <if test="score != null">
-        #{score,jdbcType=SMALLINT},
-      </if>
-      <if test="classifications != null">
-        #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
-      </if>
+        <if test="updateTime != null">
+            #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createUser != null">
+            #{createUser,jdbcType=VARCHAR},
+        </if>
+        <if test="updateUser != null">
+            #{updateUser,jdbcType=VARCHAR},
+        </if>
+        <if test="deleteFlag != null">
+            #{deleteFlag,jdbcType=SMALLINT},
+        </if>
+        <if test="name != null">
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="updateDate != null">
+            #{updateDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="version != null">
+            #{version,jdbcType=VARCHAR},
+        </if>
+        <if test="platform != null">
+            #{platform,jdbcType=VARCHAR},
+        </if>
+        <if test="distPlatforms != null">
+            #{distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+        </if>
+        <if test="size != null">
+            #{size,jdbcType=BIGINT},
+        </if>
+        <if test="hasAd != null">
+            #{hasAd,jdbcType=SMALLINT},
+        </if>
+        <if test="brief != null">
+            #{brief,jdbcType=VARCHAR},
+        </if>
+        <if test="score != null">
+            #{score,jdbcType=SMALLINT},
+        </if>
+        <if test="classifications != null">
+            #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+        </if>
       <if test="tags != null">
         #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       </if>
@@ -540,45 +551,50 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.createUser != null">
-        create_user = #{record.createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.updateUser != null">
-        update_user = #{record.updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.updateDate != null">
-        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.version != null">
-        version = #{record.version,jdbcType=VARCHAR},
-      </if>
-      <if test="record.platform != null">
-        platform = #{record.platform,jdbcType=VARCHAR},
-      </if>
-      <if test="record.distPlatforms != null">
-        dist_platforms = #{record.distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
-      </if>
-      <if test="record.size != null">
-        size = #{record.size,jdbcType=BIGINT},
-      </if>
-      <if test="record.hasad != null">
-        hasAd = #{record.hasad,jdbcType=SMALLINT},
-      </if>
-      <if test="record.brief != null">
-        brief = #{record.brief,jdbcType=VARCHAR},
-      </if>
-      <if test="record.score != null">
-        score = #{record.score,jdbcType=SMALLINT},
-      </if>
-      <if test="record.classifications != null">
-        classifications = #{record.classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
-      </if>
+        <if test="record.updateTime != null">
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.createUser != null">
+            create_user = #{record.createUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.updateUser != null">
+            update_user = #{record.updateUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.deleteFlag != null">
+            delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
+        </if>
+        <if test="record.name != null">
+            name = #{record.name,jdbcType=VARCHAR},
+        </if>
+        <if test="record.updateDate != null">
+            update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.version != null">
+            version = #{record.version,jdbcType=VARCHAR},
+        </if>
+        <if test="record.platform != null">
+            platform = #{record.platform,jdbcType=VARCHAR},
+        </if>
+        <if test="record.distPlatforms != null">
+            dist_platforms =
+            #{record.distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+        </if>
+        <if test="record.size != null">
+            size = #{record.size,jdbcType=BIGINT},
+        </if>
+        <if test="record.hasAd != null">
+            has_ad = #{record.hasAd,jdbcType=SMALLINT},
+        </if>
+        <if test="record.brief != null">
+            brief = #{record.brief,jdbcType=VARCHAR},
+        </if>
+        <if test="record.score != null">
+            score = #{record.score,jdbcType=SMALLINT},
+        </if>
+        <if test="record.classifications != null">
+            classifications =
+            #{record.classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+        </if>
       <if test="record.tags != null">
         tags = #{record.tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       </if>
@@ -612,22 +628,25 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update star.app
-    set uuid = #{record.uuid,jdbcType=VARCHAR},
+      update star.app
+      set uuid = #{record.uuid,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       update_user = #{record.updateUser,jdbcType=VARCHAR},
+      delete_flag = #{record.deleteFlag,jdbcType=SMALLINT},
       name = #{record.name,jdbcType=VARCHAR},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       version = #{record.version,jdbcType=VARCHAR},
       platform = #{record.platform,jdbcType=VARCHAR},
-      dist_platforms = #{record.distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      dist_platforms =
+      #{record.distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       size = #{record.size,jdbcType=BIGINT},
-      hasAd = #{record.hasad,jdbcType=SMALLINT},
+      has_ad = #{record.hasAd,jdbcType=SMALLINT},
       brief = #{record.brief,jdbcType=VARCHAR},
       score = #{record.score,jdbcType=SMALLINT},
-      classifications = #{record.classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+      classifications =
+      #{record.classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       tags = #{record.tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       developer = #{record.developer,jdbcType=VARCHAR},
       developers = #{record.developers,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
@@ -647,45 +666,49 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUser != null">
-        create_user = #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null">
-        update_user = #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        version = #{version,jdbcType=VARCHAR},
-      </if>
-      <if test="platform != null">
-        platform = #{platform,jdbcType=VARCHAR},
-      </if>
-      <if test="distPlatforms != null">
-        dist_platforms = #{distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
-      </if>
-      <if test="size != null">
-        size = #{size,jdbcType=BIGINT},
-      </if>
-      <if test="hasad != null">
-        hasAd = #{hasad,jdbcType=SMALLINT},
-      </if>
-      <if test="brief != null">
-        brief = #{brief,jdbcType=VARCHAR},
-      </if>
-      <if test="score != null">
-        score = #{score,jdbcType=SMALLINT},
-      </if>
-      <if test="classifications != null">
-        classifications = #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
-      </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createUser != null">
+            create_user = #{createUser,jdbcType=VARCHAR},
+        </if>
+        <if test="updateUser != null">
+            update_user = #{updateUser,jdbcType=VARCHAR},
+        </if>
+        <if test="deleteFlag != null">
+            delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+        </if>
+        <if test="name != null">
+            name = #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="updateDate != null">
+            update_date = #{updateDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="version != null">
+            version = #{version,jdbcType=VARCHAR},
+        </if>
+        <if test="platform != null">
+            platform = #{platform,jdbcType=VARCHAR},
+        </if>
+        <if test="distPlatforms != null">
+            dist_platforms = #{distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+        </if>
+        <if test="size != null">
+            size = #{size,jdbcType=BIGINT},
+        </if>
+        <if test="hasAd != null">
+            has_ad = #{hasAd,jdbcType=SMALLINT},
+        </if>
+        <if test="brief != null">
+            brief = #{brief,jdbcType=VARCHAR},
+        </if>
+        <if test="score != null">
+            score = #{score,jdbcType=SMALLINT},
+        </if>
+        <if test="classifications != null">
+            classifications =
+            #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
+        </if>
       <if test="tags != null">
         tags = #{tags,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       </if>
@@ -717,18 +740,19 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.warmfrog.star.dao.mapper.entity.App">
-    update star.app
-    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update star.app
+      set create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
       update_user = #{updateUser,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=SMALLINT},
       name = #{name,jdbcType=VARCHAR},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
       version = #{version,jdbcType=VARCHAR},
       platform = #{platform,jdbcType=VARCHAR},
       dist_platforms = #{distPlatforms,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
       size = #{size,jdbcType=BIGINT},
-      hasAd = #{hasad,jdbcType=SMALLINT},
+      has_ad = #{hasAd,jdbcType=SMALLINT},
       brief = #{brief,jdbcType=VARCHAR},
       score = #{score,jdbcType=SMALLINT},
       classifications = #{classifications,jdbcType=OTHER,typeHandler=com.warmfrog.star.dao.handler.ArrayTypeHandler},
