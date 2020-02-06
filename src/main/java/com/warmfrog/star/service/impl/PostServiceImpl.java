@@ -28,15 +28,15 @@ public class PostServiceImpl implements PostService {
     PostDao postDao;
 
     public void insert(PostDto postDto) {
-        postDao.getMapper().insert(PostBuilder.buildInsert(postDto));
+        postDao.getMapper().insert(PostBuilder.newInstance().buildInsert(postDto));
     }
 
     public void update(PostDto postDto) {
-        postDao.getMapper().updateByPrimaryKeySelective(PostBuilder.buildUpdate(postDto));
+        postDao.getMapper().updateByPrimaryKeySelective(PostBuilder.newInstance().buildUpdate(postDto));
     }
 
     public void delete(PostDto postDto) {
-        postDao.getMapper().deleteByPrimaryKey(postDto.getUuid());
+        postDao.getMapper().updateByPrimaryKeySelective(PostBuilder.newInstance().buildDelete(postDto));
     }
 
     public PostVo get(PostDto postDto) {
