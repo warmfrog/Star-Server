@@ -38,18 +38,21 @@ public class AlbumVo {
     private Date uploadDate;
 
     private Date shootTime;
-
+    private Integer photoCount;
     private Object tags;
-
     private Object classifications;
-
     private String photographer;
-
     private String model;
-
     private String position;
-
     private Object metadata;
+
+    public Integer getPhotoCount() {
+        return photoCount;
+    }
+
+    public void setPhotoCount(Integer photoCount) {
+        this.photoCount = photoCount;
+    }
 
     public String getUuid() {
         return uuid;

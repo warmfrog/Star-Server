@@ -122,8 +122,8 @@ public class AlbumCriteria {
 
         public boolean isValid() {
             return criteria.size() > 0
-                    || tagsCriteria.size() > 0
-                    || classificationsCriteria.size() > 0;
+                || tagsCriteria.size() > 0
+                || classificationsCriteria.size() > 0;
         }
 
         public List<Criterion> getAllCriteria() {
@@ -691,6 +691,66 @@ public class AlbumCriteria {
 
         public Criteria andTitleNotBetween(String value1, String value2) {
             addCriterion("title not between", value1, value2, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountIsNull() {
+            addCriterion("photo_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountIsNotNull() {
+            addCriterion("photo_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountEqualTo(Integer value) {
+            addCriterion("photo_count =", value, "photoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountNotEqualTo(Integer value) {
+            addCriterion("photo_count <>", value, "photoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountGreaterThan(Integer value) {
+            addCriterion("photo_count >", value, "photoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("photo_count >=", value, "photoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountLessThan(Integer value) {
+            addCriterion("photo_count <", value, "photoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountLessThanOrEqualTo(Integer value) {
+            addCriterion("photo_count <=", value, "photoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountIn(List<Integer> values) {
+            addCriterion("photo_count in", values, "photoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountNotIn(List<Integer> values) {
+            addCriterion("photo_count not in", values, "photoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountBetween(Integer value1, Integer value2) {
+            addCriterion("photo_count between", value1, value2, "photoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("photo_count not between", value1, value2, "photoCount");
             return (Criteria) this;
         }
 

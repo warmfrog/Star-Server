@@ -74,6 +74,16 @@ public class PostDto extends PageDto {
 
     private List<Cite> cites;
 
+    private Short releaseStatus;
+
+    public Short getReleaseStatus() {
+        return releaseStatus;
+    }
+
+    public void setReleaseStatus(Short releaseStatus) {
+        this.releaseStatus = releaseStatus;
+    }
+
     public String getUuid() {
         return uuid;
     }

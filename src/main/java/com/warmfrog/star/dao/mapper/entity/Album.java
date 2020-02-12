@@ -19,6 +19,8 @@ public class Album {
 
     private String title;
 
+    private Integer photoCount;
+
     private String thumbnail;
 
     private String downloadUrl;
@@ -109,6 +111,14 @@ public class Album {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Integer getPhotoCount() {
+        return photoCount;
+    }
+
+    public void setPhotoCount(Integer photoCount) {
+        this.photoCount = photoCount;
     }
 
     public String getThumbnail() {
@@ -236,27 +246,28 @@ public class Album {
         }
         Album other = (Album) that;
         return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
-                && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-                && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-                && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
-                && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
-                && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
-                && (this.getTheme() == null ? other.getTheme() == null : this.getTheme().equals(other.getTheme()))
-                && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-                && (this.getThumbnail() == null ? other.getThumbnail() == null : this.getThumbnail().equals(other.getThumbnail()))
-                && (this.getDownloadUrl() == null ? other.getDownloadUrl() == null : this.getDownloadUrl().equals(other.getDownloadUrl()))
-                && (this.getLikes() == null ? other.getLikes() == null : this.getLikes().equals(other.getLikes()))
-                && (this.getCollectCount() == null ? other.getCollectCount() == null : this.getCollectCount().equals(other.getCollectCount()))
-                && (this.getDownloadCount() == null ? other.getDownloadCount() == null : this.getDownloadCount().equals(other.getDownloadCount()))
-                && (this.getCommentCount() == null ? other.getCommentCount() == null : this.getCommentCount().equals(other.getCommentCount()))
-                && (this.getBrowsedCount() == null ? other.getBrowsedCount() == null : this.getBrowsedCount().equals(other.getBrowsedCount()))
-                && (this.getUploadDate() == null ? other.getUploadDate() == null : this.getUploadDate().equals(other.getUploadDate()))
-                && (this.getShootTime() == null ? other.getShootTime() == null : this.getShootTime().equals(other.getShootTime()))
-                && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
-                && (this.getClassifications() == null ? other.getClassifications() == null : this.getClassifications().equals(other.getClassifications()))
-                && (this.getPhotographer() == null ? other.getPhotographer() == null : this.getPhotographer().equals(other.getPhotographer()))
-                && (this.getModel() == null ? other.getModel() == null : this.getModel().equals(other.getModel()))
-                && (this.getPosition() == null ? other.getPosition() == null : this.getPosition().equals(other.getPosition()));
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
+            && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
+            && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
+            && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
+            && (this.getTheme() == null ? other.getTheme() == null : this.getTheme().equals(other.getTheme()))
+            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+            && (this.getPhotoCount() == null ? other.getPhotoCount() == null : this.getPhotoCount().equals(other.getPhotoCount()))
+            && (this.getThumbnail() == null ? other.getThumbnail() == null : this.getThumbnail().equals(other.getThumbnail()))
+            && (this.getDownloadUrl() == null ? other.getDownloadUrl() == null : this.getDownloadUrl().equals(other.getDownloadUrl()))
+            && (this.getLikes() == null ? other.getLikes() == null : this.getLikes().equals(other.getLikes()))
+            && (this.getCollectCount() == null ? other.getCollectCount() == null : this.getCollectCount().equals(other.getCollectCount()))
+            && (this.getDownloadCount() == null ? other.getDownloadCount() == null : this.getDownloadCount().equals(other.getDownloadCount()))
+            && (this.getCommentCount() == null ? other.getCommentCount() == null : this.getCommentCount().equals(other.getCommentCount()))
+            && (this.getBrowsedCount() == null ? other.getBrowsedCount() == null : this.getBrowsedCount().equals(other.getBrowsedCount()))
+            && (this.getUploadDate() == null ? other.getUploadDate() == null : this.getUploadDate().equals(other.getUploadDate()))
+            && (this.getShootTime() == null ? other.getShootTime() == null : this.getShootTime().equals(other.getShootTime()))
+            && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
+            && (this.getClassifications() == null ? other.getClassifications() == null : this.getClassifications().equals(other.getClassifications()))
+            && (this.getPhotographer() == null ? other.getPhotographer() == null : this.getPhotographer().equals(other.getPhotographer()))
+            && (this.getModel() == null ? other.getModel() == null : this.getModel().equals(other.getModel()))
+            && (this.getPosition() == null ? other.getPosition() == null : this.getPosition().equals(other.getPosition()));
     }
 
     @Override
@@ -271,6 +282,7 @@ public class Album {
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getTheme() == null) ? 0 : getTheme().hashCode());
         result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
+        result = prime * result + ((getPhotoCount() == null) ? 0 : getPhotoCount().hashCode());
         result = prime * result + ((getThumbnail() == null) ? 0 : getThumbnail().hashCode());
         result = prime * result + ((getDownloadUrl() == null) ? 0 : getDownloadUrl().hashCode());
         result = prime * result + ((getLikes() == null) ? 0 : getLikes().hashCode());
@@ -302,6 +314,7 @@ public class Album {
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", theme=").append(theme);
         sb.append(", title=").append(title);
+        sb.append(", photoCount=").append(photoCount);
         sb.append(", thumbnail=").append(thumbnail);
         sb.append(", downloadUrl=").append(downloadUrl);
         sb.append(", likes=").append(likes);

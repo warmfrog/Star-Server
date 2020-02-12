@@ -260,14 +260,14 @@ public class PostCriteria {
 
         public boolean isValid() {
             return criteria.size() > 0
-                    || keyWordsCriteria.size() > 0
-                    || authorCriteria.size() > 0
-                    || authorsCriteria.size() > 0
-                    || imagesCriteria.size() > 0
-                    || releasedPlatformsCriteria.size() > 0
-                    || tagsCriteria.size() > 0
-                    || classificationsCriteria.size() > 0
-                    || citesCriteria.size() > 0;
+                || keyWordsCriteria.size() > 0
+                || authorCriteria.size() > 0
+                || authorsCriteria.size() > 0
+                || imagesCriteria.size() > 0
+                || releasedPlatformsCriteria.size() > 0
+                || tagsCriteria.size() > 0
+                || classificationsCriteria.size() > 0
+                || citesCriteria.size() > 0;
         }
 
         public List<Criterion> getAllCriteria() {
@@ -2401,6 +2401,66 @@ public class PostCriteria {
 
         public Criteria andCitesNotBetween(Object value1, Object value2) {
             addCitesCriterion("cites not between", value1, value2, "cites");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusIsNull() {
+            addCriterion("release_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusIsNotNull() {
+            addCriterion("release_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusEqualTo(Short value) {
+            addCriterion("release_status =", value, "releaseStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusNotEqualTo(Short value) {
+            addCriterion("release_status <>", value, "releaseStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusGreaterThan(Short value) {
+            addCriterion("release_status >", value, "releaseStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusGreaterThanOrEqualTo(Short value) {
+            addCriterion("release_status >=", value, "releaseStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusLessThan(Short value) {
+            addCriterion("release_status <", value, "releaseStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusLessThanOrEqualTo(Short value) {
+            addCriterion("release_status <=", value, "releaseStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusIn(List<Short> values) {
+            addCriterion("release_status in", values, "releaseStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusNotIn(List<Short> values) {
+            addCriterion("release_status not in", values, "releaseStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusBetween(Short value1, Short value2) {
+            addCriterion("release_status between", value1, value2, "releaseStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andReleaseStatusNotBetween(Short value1, Short value2) {
+            addCriterion("release_status not between", value1, value2, "releaseStatus");
             return (Criteria) this;
         }
     }

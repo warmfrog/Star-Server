@@ -69,6 +69,8 @@ public class Post {
 
     private Object cites;
 
+    private Short releaseStatus;
+
     public String getUuid() {
         return uuid;
     }
@@ -333,6 +335,14 @@ public class Post {
         this.cites = cites;
     }
 
+    public Short getReleaseStatus() {
+        return releaseStatus;
+    }
+
+    public void setReleaseStatus(Short releaseStatus) {
+        this.releaseStatus = releaseStatus;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -346,38 +356,39 @@ public class Post {
         }
         Post other = (Post) that;
         return (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
-                && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-                && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-                && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
-                && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
-                && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
-                && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-                && (this.getKeyWords() == null ? other.getKeyWords() == null : this.getKeyWords().equals(other.getKeyWords()))
-                && (this.getAuthor() == null ? other.getAuthor() == null : this.getAuthor().equals(other.getAuthor()))
-                && (this.getAuthors() == null ? other.getAuthors() == null : this.getAuthors().equals(other.getAuthors()))
-                && (this.getFilePath() == null ? other.getFilePath() == null : this.getFilePath().equals(other.getFilePath()))
-                && (this.getDownloadUrl() == null ? other.getDownloadUrl() == null : this.getDownloadUrl().equals(other.getDownloadUrl()))
-                && (this.getContentMarkdown() == null ? other.getContentMarkdown() == null : this.getContentMarkdown().equals(other.getContentMarkdown()))
-                && (this.getContentHtml() == null ? other.getContentHtml() == null : this.getContentHtml().equals(other.getContentHtml()))
-                && (this.getReleaseTime() == null ? other.getReleaseTime() == null : this.getReleaseTime().equals(other.getReleaseTime()))
-                && (this.getBrief() == null ? other.getBrief() == null : this.getBrief().equals(other.getBrief()))
-                && (this.getCoverImage() == null ? other.getCoverImage() == null : this.getCoverImage().equals(other.getCoverImage()))
-                && (this.getImages() == null ? other.getImages() == null : this.getImages().equals(other.getImages()))
-                && (this.getWordCount() == null ? other.getWordCount() == null : this.getWordCount().equals(other.getWordCount()))
-                && (this.getReaderCount() == null ? other.getReaderCount() == null : this.getReaderCount().equals(other.getReaderCount()))
-                && (this.getLikes() == null ? other.getLikes() == null : this.getLikes().equals(other.getLikes()))
-                && (this.getDislikes() == null ? other.getDislikes() == null : this.getDislikes().equals(other.getDislikes()))
-                && (this.getCollectionCount() == null ? other.getCollectionCount() == null : this.getCollectionCount().equals(other.getCollectionCount()))
-                && (this.getDownloadCount() == null ? other.getDownloadCount() == null : this.getDownloadCount().equals(other.getDownloadCount()))
-                && (this.getCommentCount() == null ? other.getCommentCount() == null : this.getCommentCount().equals(other.getCommentCount()))
-                && (this.getReleasedPlatforms() == null ? other.getReleasedPlatforms() == null : this.getReleasedPlatforms().equals(other.getReleasedPlatforms()))
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
+            && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
+            && (this.getUpdateUser() == null ? other.getUpdateUser() == null : this.getUpdateUser().equals(other.getUpdateUser()))
+            && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
+            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+            && (this.getKeyWords() == null ? other.getKeyWords() == null : this.getKeyWords().equals(other.getKeyWords()))
+            && (this.getAuthor() == null ? other.getAuthor() == null : this.getAuthor().equals(other.getAuthor()))
+            && (this.getAuthors() == null ? other.getAuthors() == null : this.getAuthors().equals(other.getAuthors()))
+            && (this.getFilePath() == null ? other.getFilePath() == null : this.getFilePath().equals(other.getFilePath()))
+            && (this.getDownloadUrl() == null ? other.getDownloadUrl() == null : this.getDownloadUrl().equals(other.getDownloadUrl()))
+            && (this.getContentMarkdown() == null ? other.getContentMarkdown() == null : this.getContentMarkdown().equals(other.getContentMarkdown()))
+            && (this.getContentHtml() == null ? other.getContentHtml() == null : this.getContentHtml().equals(other.getContentHtml()))
+            && (this.getReleaseTime() == null ? other.getReleaseTime() == null : this.getReleaseTime().equals(other.getReleaseTime()))
+            && (this.getBrief() == null ? other.getBrief() == null : this.getBrief().equals(other.getBrief()))
+            && (this.getCoverImage() == null ? other.getCoverImage() == null : this.getCoverImage().equals(other.getCoverImage()))
+            && (this.getImages() == null ? other.getImages() == null : this.getImages().equals(other.getImages()))
+            && (this.getWordCount() == null ? other.getWordCount() == null : this.getWordCount().equals(other.getWordCount()))
+            && (this.getReaderCount() == null ? other.getReaderCount() == null : this.getReaderCount().equals(other.getReaderCount()))
+            && (this.getLikes() == null ? other.getLikes() == null : this.getLikes().equals(other.getLikes()))
+            && (this.getDislikes() == null ? other.getDislikes() == null : this.getDislikes().equals(other.getDislikes()))
+            && (this.getCollectionCount() == null ? other.getCollectionCount() == null : this.getCollectionCount().equals(other.getCollectionCount()))
+            && (this.getDownloadCount() == null ? other.getDownloadCount() == null : this.getDownloadCount().equals(other.getDownloadCount()))
+            && (this.getCommentCount() == null ? other.getCommentCount() == null : this.getCommentCount().equals(other.getCommentCount()))
+            && (this.getReleasedPlatforms() == null ? other.getReleasedPlatforms() == null : this.getReleasedPlatforms().equals(other.getReleasedPlatforms()))
             && (this.getReferencedCount() == null ? other.getReferencedCount() == null : this.getReferencedCount().equals(other.getReferencedCount()))
             && (this.getScore() == null ? other.getScore() == null : this.getScore().equals(other.getScore()))
             && (this.getLanguage() == null ? other.getLanguage() == null : this.getLanguage().equals(other.getLanguage()))
             && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
             && (this.getClassifications() == null ? other.getClassifications() == null : this.getClassifications().equals(other.getClassifications()))
             && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-            && (this.getCites() == null ? other.getCites() == null : this.getCites().equals(other.getCites()));
+            && (this.getCites() == null ? other.getCites() == null : this.getCites().equals(other.getCites()))
+            && (this.getReleaseStatus() == null ? other.getReleaseStatus() == null : this.getReleaseStatus().equals(other.getReleaseStatus()));
     }
 
     @Override
@@ -417,6 +428,7 @@ public class Post {
         result = prime * result + ((getClassifications() == null) ? 0 : getClassifications().hashCode());
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getCites() == null) ? 0 : getCites().hashCode());
+        result = prime * result + ((getReleaseStatus() == null) ? 0 : getReleaseStatus().hashCode());
         return result;
     }
 
@@ -459,6 +471,7 @@ public class Post {
         sb.append(", classifications=").append(classifications);
         sb.append(", type=").append(type);
         sb.append(", cites=").append(cites);
+        sb.append(", releaseStatus=").append(releaseStatus);
         sb.append("]");
         return sb.toString();
     }

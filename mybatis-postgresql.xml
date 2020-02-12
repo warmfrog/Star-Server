@@ -24,14 +24,14 @@
 						 targetProject="src/main/java"/>
 		<javaClientGenerator targetPackage="com.warmfrog.star.dao.mapper"
 							 targetProject="src/main/java" type="XMLMAPPER"/>
-		<!--        <table schema="star" tableName="album">-->
-		<!--            <columnOverride column="tags" jdbcType="OTHER"-->
-		<!--                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
-		<!--            <columnOverride column="classifications" jdbcType="OTHER"-->
-		<!--                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
-		<!--            <columnOverride column="metadata" jdbcType="OTHER"-->
-		<!--                            typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
-		<!--        </table>-->
+<!--		        <table schema="star" tableName="album">-->
+<!--		            <columnOverride column="tags" jdbcType="OTHER"-->
+<!--		                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+<!--		            <columnOverride column="classifications" jdbcType="OTHER"-->
+<!--		                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->
+<!--		            <columnOverride column="metadata" jdbcType="OTHER"-->
+<!--		                            typeHandler="com.warmfrog.star.dao.handler.JsonTypeHandler"/>-->
+<!--		        </table>-->
 		<!--        <table schema="star" tableName="app">-->
 		<!--            <columnOverride column="dist_platforms" jdbcType="OTHER"-->
 		<!--                            typeHandler="com.warmfrog.star.dao.handler.ArrayTypeHandler"/>-->

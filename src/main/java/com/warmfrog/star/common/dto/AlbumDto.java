@@ -20,6 +20,15 @@ public class AlbumDto extends PageDto {
     private String theme;
 
     private String title;
+    private Integer photoCount;
+
+    public Integer getPhotoCount() {
+        return photoCount;
+    }
+
+    public void setPhotoCount(Integer photoCount) {
+        this.photoCount = photoCount;
+    }
 
     private String thumbnail;
 
