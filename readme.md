@@ -1,4 +1,4 @@
-# 基于 Spring Boot 的 Restful Star 收藏系统 Web 应用后端
+# 基于 Spring Boot 的 Restful Star-Server Web 应用后端
 
 对实体的增删改查的 Spring Restful Web 应用后端。
 
