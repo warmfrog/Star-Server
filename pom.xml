@@ -128,7 +128,8 @@
                     <exclude>sql/*</exclude>
                 </excludes>
                 <includes>
-                    <include>*.properties</include>
+                    <include>application.properties</include>
+                    <include>application-db.properties</include>
                 </includes>
             </resource>
         </resources>
