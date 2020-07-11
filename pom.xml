@@ -146,6 +146,7 @@
                 <includes>
                     <include>application.properties</include>
                     <include>application-db.properties</include>
+                    <include>logback-spring.xml</include>
                 </includes>
             </resource>
         </resources>
