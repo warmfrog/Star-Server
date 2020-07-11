@@ -1,6 +1,10 @@
 # 基于 Spring Boot 的 Restful Star-Server Web 应用后端
 
-对实体的增删改查的 Spring Restful Web 应用后端。
+对实体的增删改查的 Spring Restful Web 应用后端。搭配基于 Vue.js 的 star-client web 前端
+
+## 在 Docker 中 运行
+
+`docker run warmfrog/star-server:0.0.1`
 
 ## 工具框架
 
